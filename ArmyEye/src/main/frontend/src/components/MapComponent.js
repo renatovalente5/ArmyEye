@@ -1,32 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import axios from "axios";
 
 
-export default function MapComponent() {
-    const [viewport, setViewport] = useState({
-        latitude: 40.6412,
-        longitude: -8.65362,
-        width: "52vw",
-        height: "67vh",
-        zoom: 10
-    });
-
-    const [armys, setArmys] = useState("");
-
-
-    useEffect(() => {
-        try {
-            axios.get("http://localhost:8080/map").then(response => {
-                setArmys(response.data)
-            });
-        } catch (e) {
-            console.log(e);
+class MapComponent extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            planes:[],
+            viewport:{
+                latitude: 37.41037,
+                longitude: -122.05937,
+                width: "52vw",
+                height: "67vh",
+                zoom: 6
+            },
+            mounted: false
         }
-    });
+        this.loadData = this.loadData.bind(this);
+    }
 
-    async function loadData() {
+    componentDidMount(){
+        this.loadData();
+        setInterval(this.loadData, 100000);
+        this.setState({ mounted: true })
+
+    }
+
+    async loadData() {
         try {
             axios.get("http://localhost:8080/map").then(response => {
                 this.setState({ planes: response.data })
@@ -36,32 +38,27 @@ export default function MapComponent() {
         }
     }
 
+    render(){
+        const { mounted } = this.state
+        return(
+            <div >
+                <p>{this.state.planes.latitude}</p>
+                <ReactMapGL {...this.state.viewport}
+                            onViewportChange={(viewport) => {
+                                if (mounted) { this.setState({ viewport }) }
+                            }}
+                            mapboxApiAccessToken="pk.eyJ1Ijoicml0YS1hbWFudGU5OTU1IiwiYSI6ImNrbmEyZGpzYzBqcjcybm55Z2NyOTVkazMifQ.oRw17OIsKSA0CeIUG2UC1Q">
 
-    return (
-        <div className='StoryList' >
-            <div className='story-list-map' >
-                <p>Army: {armys}</p>
-                <ReactMapGL
-                    {...viewport}
-                    mapboxApiAccessToken={"pk.eyJ1Ijoicml0YS1hbWFudGU5OTU1IiwiYSI6ImNrbmEyZGpzYzBqcjcybm55Z2NyOTVkazMifQ.oRw17OIsKSA0CeIUG2UC1Q"}
-                    onViewportChange={viewport => {
-                        setViewport(viewport);
-                    }}
-                >
-                    <Marker
-                        key={"ola"}
-                        latitude={40.6312}
-                        longitude={-8.65492}
-                    >
-
-                        <img  width="20" height="20" src="../soldado.jpg" alt="Army Icon" />
-
-                    </Marker>
-
-
+                    {this.state.planes.map( arm => (
+                            <Marker key={arm.latitude} latitude={Number(arm.latitude)} longitude={Number(arm.longitude)}>
+                                <img  width="20" height="20" src="../soldado.jpg" alt="Army Icon" />
+                            </Marker>
+                        )
+                    )}
                 </ReactMapGL>
             </div>
-        </div>
-    );
-
+        );
+    }
 }
+
+export default MapComponent

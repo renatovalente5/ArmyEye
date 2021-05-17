@@ -1,16 +1,17 @@
 package com.project.ArmyEye.Models;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 public class GPS {
-    public Date TimestampUTC;
-    public long Timestampms;
-    public Date GPStime;
-    public double Latitude;
-    public double Longitude;
-    public double Altitude;
+    public String TimestampUTC;
+    public String Timestampms;
+    public String GPStime;
+    public String Latitude;
+    public String Longitude;
+    public String Altitude;
     
-    public GPS(Date timestampUTC, long timestampms, Date gPStime, double latitude, double longitude, double altitude) {
+    public GPS(String timestampUTC, String timestampms, String gPStime, String latitude, String longitude, String altitude) {
 		super();
 		TimestampUTC = timestampUTC;
 		Timestampms = timestampms;
@@ -19,47 +20,51 @@ public class GPS {
 		Longitude = longitude;
 		Altitude = altitude;
 	}
-    
-	public Date getTimestampUTC() {
+
+	public GPS() {
+
+	}
+
+	public String getTimestampUTC() {
 		return TimestampUTC;
 	}
-	public void setTimestampUTC(Date timestampUTC) {
+	public void setTimestampUTC(String timestampUTC) {
 		TimestampUTC = timestampUTC;
 	}
-	public long getTimestampms() {
+	public String getTimestampms() {
 		return Timestampms;
 	}
-	public void setTimestampms(long timestampms) {
+	public void setTimestampms(String timestampms) {
 		Timestampms = timestampms;
 	}
-	public Date getGPStime() {
+	public String getGPStime() {
 		return GPStime;
 	}
-	public void setGPStime(Date gPStime) {
+	public void setGPStime(String gPStime) {
 		GPStime = gPStime;
 	}
-	public double getLatitude() {
+	public String getLatitude() {
 		return Latitude;
 	}
-	public void setLatitude(double latitude) {
+	public void setLatitude(String latitude) {
 		Latitude = latitude;
 	}
-	public double getLongitude() {
+	public String getLongitude() {
 		return Longitude;
 	}
-	public void setLongitude(double longitude) {
+	public void setLongitude(String longitude) {
 		Longitude = longitude;
 	}
-	public double getAltitude() {
+	public String getAltitude() {
 		return Altitude;
 	}
-	public void setAltitude(double altitude) {
+	public void setAltitude(String altitude) {
 		Altitude = altitude;
 	}
 	
 	@Override
 	public String toString() {
-		return "GPS [getTimestampUTC()=" + getTimestampUTC() + ", getTimestampms()=" + getTimestampms()
+		return "Comp1 [getTimestampUTC()=" + getTimestampUTC() + ", getTimestampms()=" + getTimestampms()
 				+ ", getGPStime()=" + getGPStime() + ", getLatitude()=" + getLatitude() + ", getLongitude()="
 				+ getLongitude() + ", getAltitude()=" + getAltitude() + "]";
 	}
