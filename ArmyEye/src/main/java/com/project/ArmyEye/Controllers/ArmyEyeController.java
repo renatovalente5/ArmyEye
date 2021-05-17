@@ -19,24 +19,24 @@ public class ArmyEyeController {
     @GetMapping("/map")
     @Scheduled(fixedRate = 5000)
     public String getMap(){
-        File file = new File("java/com/project/ArmyEye/sample_data/GPS.tsv");
-        armys = tsvr(file);
+        armys = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
         System.out.println("armys:" + armys);
         return "Map here";
     }
 
-    public static ArrayList<String[]> tsvr(File test2) {
-        ArrayList<String[]> Data = new ArrayList<>(); //initializing a new ArrayList out of String[]'s
-        try (BufferedReader TSVReader = new BufferedReader(new FileReader(test2))) {
+    public static List<String[]> tsvr(String test2) {
+        List<String[]> Data = new ArrayList<>(); //initializing a new ArrayList out of String[]'s
+        try{
+            BufferedReader TSVReader = new BufferedReader(new FileReader(test2));
             System.out.println("aaaaaa");
             String line = null;
             while ((line = TSVReader.readLine()) != null) {
-                System.out.println("bbbbbb");
+                System.out.println(line);
                 String[] lineItems = line.split("\t"); //splitting the line and adding its items in String[]
                 Data.add(lineItems); //adding the splitted line array to the ArrayList
             }
         } catch (Exception e) {
-            System.out.println("Something went wrong");
+            System.out.println(e);
         }
         return Data;
     }
