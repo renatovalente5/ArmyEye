@@ -1,0 +1,4 @@
+{ "acquisition 3219": [
+{"aggregator": { "id":"3185","name":"Samsung Galaxy S7","mac":"02:00:00:00:00:00"}}
+,{"acquisition": { "id":"3219","name":"USA ","description":"CMU","domain":" ","team":" ","start":"2016-11-09 19:29:43.628","end":"2016-11-09 19:40:10.105","duration":"0 0:10:26"}}
+,{"sensors": [{"id":"3219","name":"1LN1200065","mac":"00:23:FE:00:0A:50","frequency":"ECG: 500 Hz, Other values: 1 Hz","type":"VitalJacket"},{"id":"3219","name":"GPS","mac":"gps_no_mac","frequency":"Unknown","type":"GPS"},{"id":"3219","name":"HelmetUnit7","mac":"00:06:66:7C:65:76","frequency":"0.1 Hz","type":"Helmet"},{"id":"3219","name":"Samsung Galaxy S7","mac":"02:00:00:00:00:00","frequency":"Unknown","type":"Unit"}]}

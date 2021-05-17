@@ -1,4 +1,4 @@
-package com.project.ArmyEye;
+package com.project.ArmyEye.Controllers;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 //@RequestMapping("/myapp")
 @CrossOrigin("*")
 public class ArmyEyeController {
+
+    @GetMapping("/map")
+    public String getMap(){
+        return "Map here";
+    }
 
     @GetMapping("/comp1")
     public String getComp1(){
