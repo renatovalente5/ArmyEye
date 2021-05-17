@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
+import axios from "axios";
 
 
 export default function MapComponent() {
@@ -12,11 +13,34 @@ export default function MapComponent() {
         zoom: 10
     });
 
-    const [selectedPark, setSelectedPark] = useState(null);
+    const [armys, setArmys] = useState("");
+
+
+    useEffect(() => {
+        try {
+            axios.get("http://localhost:8080/map").then(response => {
+                setArmys(response.data)
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    });
+
+    async function loadData() {
+        try {
+            axios.get("http://localhost:8080/map").then(response => {
+                this.setState({ planes: response.data })
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
 
     return (
         <div className='StoryList' >
             <div className='story-list-map' >
+                <p>Army: {armys}</p>
                 <ReactMapGL
                     {...viewport}
                     mapboxApiAccessToken={"pk.eyJ1Ijoicml0YS1hbWFudGU5OTU1IiwiYSI6ImNrbmEyZGpzYzBqcjcybm55Z2NyOTVkazMifQ.oRw17OIsKSA0CeIUG2UC1Q"}
