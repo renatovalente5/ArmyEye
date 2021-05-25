@@ -8,7 +8,7 @@
 		<version>2.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.project</groupId>
+	<groupId>pt.ua.deti.es.p21.project</groupId>
 	<artifactId>ArmyEye</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ArmyEye</name>
@@ -16,13 +16,6 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
-<!--	<distributionManagement>-->
-<!--		<repository>-->
-<!--			<id>internal.repo</id>-->
-<!--			<name>Army Eye Deploy</name>-->
-<!--			<url>192.168.160.87</url>-->
-<!--		</repository>-->
-<!--	</distributionManagement>-->
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -69,6 +62,18 @@
 			<scope>test</scope>
 		</dependency>
     </dependencies>
+		<distributionManagement>
+			<repository>
+				<id>central</id>
+				<name>es2021</name>
+				<url>http://192.168.160.49:8082/artifactory/maven_es2021/</url>
+			</repository>
+			<snapshotRepository>
+				<id>snapshots</id>
+				<name>es2021</name>
+				<url>http://192.168.160.49:8082/artifactory/maven_es2021/</url>
+			</snapshotRepository>
+		</distributionManagement>
 
 	<build>
 		<plugins>
