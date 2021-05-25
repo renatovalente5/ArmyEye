@@ -32,7 +32,7 @@ class App extends React.Component{
         <Router>
           <div>
             <H0><i>ArmyEyer</i></H0>
-            <H1> Our Army are comming...</H1>
+            <H1> The Army is coming...</H1>
 
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
               <ul className="navbar-nav mr-auto">

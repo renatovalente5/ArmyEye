@@ -13,7 +13,15 @@ import java.util.*;
 @CrossOrigin("*")
 public class ArmyEyeController {
 
-    private LinkedList<GPS> armyGPS;
+    public static LinkedList<GPS> getArmyGPS() {
+        return armyGPS;
+    }
+
+    public Map<String, LinkedList<GPS>> getTrackerArmyGPS() {
+        return trackerArmyGPS;
+    }
+
+    private static LinkedList<GPS> armyGPS;
     private Map<String, LinkedList<GPS>> trackerArmyGPS = new HashMap<>();
 
     @GetMapping("/map")
