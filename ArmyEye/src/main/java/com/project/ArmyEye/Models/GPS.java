@@ -1,9 +1,17 @@
 package com.project.ArmyEye.Models;
 
+import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
+@Entity
+@Table(name = "GPS")
 public class GPS {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
     public String TimestampUTC;
     public String Timestampms;
     public String GPStime;

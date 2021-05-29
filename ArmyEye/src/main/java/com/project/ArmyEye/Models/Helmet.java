@@ -1,8 +1,18 @@
 package com.project.ArmyEye.Models;
 
+import javax.persistence.*;
+
+@Entity
+@Table (name = "Helmet")
 public class Helmet
 {
-    public String Name;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
+
+	public String Name;
     public String Department;
     public String Manager;
     public int Salary;
@@ -15,6 +25,11 @@ public class Helmet
 		Manager = manager;
 		Salary = salary;
 	}
+
+	public Helmet() {
+
+	}
+
 	public String getName() {
 		return Name;
 	}

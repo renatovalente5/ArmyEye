@@ -1,10 +1,17 @@
 package com.project.ArmyEye.Models;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "UnitBattery")
 public class Unit_Battery
 {
-    public Date TimestampUTC;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
+	public Date TimestampUTC;
     public long Timestampms;
     public double Battery;
     
@@ -13,6 +20,10 @@ public class Unit_Battery
 		TimestampUTC = timestampUTC;
 		Timestampms = timestampms;
 		Battery = battery;
+	}
+
+	public Unit_Battery() {
+
 	}
 
 	public Date getTimestampUTC() {

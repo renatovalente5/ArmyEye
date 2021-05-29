@@ -1,10 +1,19 @@
 package com.project.ArmyEye.Models;
 
+import javax.persistence.*;
 import java.util.Date;
 
+
+@Entity
+@Table(name = "Others")
 public class VitalJacket_others
 {
-    public Date TimestampUTC;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
+	public Date TimestampUTC;
     public long Timestampms;
     public double HR;
     public double RR;
@@ -21,6 +30,10 @@ public class VitalJacket_others
 		RR = rR;
 		Bodytemperature = bodytemperature;
 		Battery = battery;
+	}
+
+	public VitalJacket_others() {
+
 	}
 
 

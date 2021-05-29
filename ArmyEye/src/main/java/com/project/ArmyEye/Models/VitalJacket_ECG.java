@@ -1,12 +1,25 @@
 package com.project.ArmyEye.Models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "ECG")
 public class VitalJacket_ECG
 {
-    public double ECG;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
+	public double ECG;
 
 	public VitalJacket_ECG(double eCG) {
 		super();
 		ECG = eCG;
+	}
+
+	public VitalJacket_ECG() {
+
 	}
 
 	public double getECG() {

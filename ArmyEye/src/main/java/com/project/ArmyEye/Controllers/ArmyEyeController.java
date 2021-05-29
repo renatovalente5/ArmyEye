@@ -1,6 +1,8 @@
 package com.project.ArmyEye.Controllers;
 
 import com.project.ArmyEye.Models.GPS;
+import com.project.ArmyEye.repository.GPSRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +14,9 @@ import java.util.*;
 //@RequestMapping("/myapp")
 @CrossOrigin("*")
 public class ArmyEyeController {
+
+    @Autowired
+    private GPSRepository gpsRepository;
 
     public static LinkedList<GPS> getArmyGPS() {
         return armyGPS;
@@ -33,6 +38,7 @@ public class ArmyEyeController {
         int i = 0;
         for (String[] str : armys) {
             if (i > 0 && i<100) {
+                gpsRepository.save(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
                 armyGPS.add(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
                 System.out.println(str[0] + " " + str[1] + " " + str[2] + " " + str[3] + " " + str[4] + " " + str[5]);
             }

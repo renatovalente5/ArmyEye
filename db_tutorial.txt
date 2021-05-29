@@ -1,0 +1,12 @@
+docker run -p 5432:5432 --name ArmyDB -e POSTGRES_PASSWORD=admin -d postgres
+
+*no terminal do container*
+
+su postgres
+psql
+
+CREATE DATABASE army;
+create user esp21 with encrypted password 'admin';
+grant all privileges on database army to esp21;
+
+\c army;
