@@ -48,7 +48,7 @@ public class ArmyEyeController {
             int i = 0;
             for (String[] str : armys) {
                 if (i > 0 && i < 100) {
-                    //gpsRepository.save(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
+                    gpsRepository.save(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
                     armyGPS.add(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
                     System.out.println(str[0] + " " + str[1] + " " + str[2] + " " + str[3] + " " + str[4] + " " + str[5]);
                 }
