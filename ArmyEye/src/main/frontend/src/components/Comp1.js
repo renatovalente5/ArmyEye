@@ -48,7 +48,7 @@ class Comp1 extends React.Component {
     render(){
         return(
             <div>
-                <H0 className="text-center" > All planes <b>Get In</b> the <b>Iberian Peninsula</b> </H0>
+                <H0 className="text-center" >  <b>Army steps</b> </H0>
 
                 <table className = "table table-striped">
                     <thead>

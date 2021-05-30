@@ -2,7 +2,9 @@ package com.project.ArmyEye.Controllers;
 
 import com.project.ArmyEye.Models.GPS;
 import com.project.ArmyEye.repository.GPSRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +13,7 @@ import java.io.*;
 import java.util.*;
 
 @RestController
+@RequiredArgsConstructor
 //@RequestMapping("/myapp")
 @CrossOrigin("*")
 public class ArmyEyeController {
@@ -26,26 +29,44 @@ public class ArmyEyeController {
         return trackerArmyGPS;
     }
 
+    private final GPSRepository getGpsRepository;
+    private boolean init = true;
     private static LinkedList<GPS> armyGPS;
+    private static LinkedList<GPS> armyGPSaux;
+    private static LinkedList<GPS> movesArmyGPS;
     private Map<String, LinkedList<GPS>> trackerArmyGPS = new HashMap<>();
 
+
     @GetMapping("/map")
-    //@Scheduled(fixedRate = 100000)
+    @Scheduled(fixedRate = 100000)
     public LinkedList<GPS> getMap(){
-        armyGPS = new LinkedList<>();
-        //LinkedList<Comp1> auxList = new LinkedList<>();
-        List<String[]> armys = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
-        int i = 0;
-        for (String[] str : armys) {
-            if (i > 0 && i<100) {
-                gpsRepository.save(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
-                armyGPS.add(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
-                System.out.println(str[0] + " " + str[1] + " " + str[2] + " " + str[3] + " " + str[4] + " " + str[5]);
+        LinkedList<GPS> passo = new LinkedList<GPS>();
+        if(init==true) {
+            armyGPS = new LinkedList<>();
+            //LinkedList<Comp1> auxList = new LinkedList<>();
+            List<String[]> armys = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
+            int i = 0;
+            for (String[] str : armys) {
+                if (i > 0 && i < 100) {
+                    //gpsRepository.save(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
+                    armyGPS.add(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
+                    System.out.println(str[0] + " " + str[1] + " " + str[2] + " " + str[3] + " " + str[4] + " " + str[5]);
+                }
+                i++;
             }
-            i++;
+            System.out.println("--asasas---");
+            armyGPSaux = armyGPS;
+            movesArmyGPS = new LinkedList<GPS>();
+            init = false;
+        }else {
+            GPS aux = armyGPSaux.getFirst();
+            System.out.println("--Deu Passo----" + aux.getAltitude());
+            passo.add(aux);
+            movesArmyGPS.add(aux);
+            armyGPSaux.removeFirst();
+            getGpsRepository.save(aux);
         }
-        System.out.println("--asasas---");
-        return armyGPS;
+        return passo;
     }
 
     public static List<String[]> tsvr(String test2) {
@@ -66,8 +87,10 @@ public class ArmyEyeController {
     }
 
     @GetMapping("/gps")
-    public LinkedList<GPS> getComp1(){
-        return armyGPS;
+    public Iterable<GPS> getComp1(){
+        System.out.println("Foi à BD!");
+        System.out.println("---------------\n");
+        return getGpsRepository.findAll();
     }
 
 

@@ -12,7 +12,7 @@ class MapComponent extends React.Component {
             viewport:{
                 latitude: 37.41037,
                 longitude: -122.05937,
-                width: "52vw",
+                width: "81vw",
                 height: "67vh",
                 zoom: 6
             },
@@ -23,7 +23,7 @@ class MapComponent extends React.Component {
 
     componentDidMount(){
         this.loadData();
-        setInterval(this.loadData, 100000);
+        setInterval(this.loadData, 1000);
         this.setState({ mounted: true })
 
     }
