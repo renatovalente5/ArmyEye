@@ -19,12 +19,12 @@ const H1 = styled.h1({
 });
 
 
-class GPS extends React.Component {
+class Helmet extends React.Component {
 
     constructor(props){
       super(props);
         this.state = {
-            armys:[]
+            helmet:[]
         }
       this.loadData = this.loadData.bind(this);
     }
@@ -37,8 +37,8 @@ class GPS extends React.Component {
 
     async loadData() {
         try {
-            axios.get("http://localhost:8080/gps").then(response => {
-                this.setState({ armys: response.data })
+            axios.get("http://localhost:8080/helmet").then(response => {
+                this.setState({ helmet: response.data })
             });
         } catch (e) {
             console.log(e);
@@ -48,28 +48,36 @@ class GPS extends React.Component {
     render(){
         return(
             <div>
-                <H0 className="text-center" > Army Steps </H0>
+                <H0 className="text-center" > Army Status </H0>
 
                 <table className = "table table-striped">
                     <thead>
                     <tr>
                         <td>Timestamp (UTC)</td>
                         <td>Timestamp (ms)</td>
-                        <td>GPS time</td>
-                        <td>Latitude</td>
-                        <td>Longitude</td>
                         <td>Altitude</td>
+                        <td>CO</td>
+                        <td>NO2</td>
+                        <td>Environmentaltemperature</td>
+                        <td>Atmosphericpressure</td>
+                        <td>Humidity</td>
+                        <td>Luminosity</td>
+                        <td>Battery</td>
 
                     </tr>
                     </thead>
-                    <tbody id="myTable"> { this.state.armys.map( arm =>
-                        <tr key = {arm.Latitude}>
-                            <td>{arm.TimestampUTC}</td>
-                            <td>{arm.Timestampms}</td>
-                            <td>{arm.GPStime}</td>
-                            <td>{arm.Latitude}</td>
-                            <td>{arm.Longitude}</td>
-                            <td>{arm.Altitude}</td>
+                    <tbody id="myTable"> { this.state.helmet.map( hel =>
+                        <tr key = {hel.Timestampms}>
+                            <td>{hel.TimestampUTC}</td>
+                            <td>{hel.Timestampms}</td>
+                            <td>{hel.Altitude}</td>
+                            <td>{hel.CO}</td>
+                            <td>{hel.NO2}</td>
+                            <td>{hel.Environmentaltemperature}</td>
+                            <td>{hel.Atmosphericpressure}</td>
+                            <td>{hel.Humidity}</td>
+                            <td>{hel.Luminosity}</td>
+                            <td>{hel.Battery}</td>
                         </tr>
                     )
                     }
@@ -80,4 +88,4 @@ class GPS extends React.Component {
     }
 }
 
-export default GPS
+export default Helmet

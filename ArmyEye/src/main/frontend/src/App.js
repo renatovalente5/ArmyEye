@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import MapComponent from "./components/MapComponent";
 import GPS from "./components/GPS";
+import Helmet from "./components/Helmet";
 import Comp2 from "./components/Comp2";
 
 
@@ -38,6 +39,7 @@ class App extends React.Component{
               <ul className="navbar-nav mr-auto">
                 <li><Link to={'/map'} className="nav-link"><b>Map</b></Link></li>
                 <li><Link to={'/gps'} className="nav-link"><b>GPS</b></Link></li>
+                <li><Link to={'/helmet'} className="nav-link"><b>Helmet</b></Link></li>
                 <li><Link to={'/comp2'} className="nav-link"><b>Comp2</b></Link></li>
               </ul>
             </nav>
@@ -45,6 +47,7 @@ class App extends React.Component{
             <Switch>
               <Route path='/map' component={MapComponent}/>
               <Route path='/gps' component={GPS}/>
+              <Route path='/helmet' component={Helmet}/>
               <Route path='/comp2' component={Comp2}/>
             </Switch>
           </div>
