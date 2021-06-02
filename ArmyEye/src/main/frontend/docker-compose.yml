@@ -2,7 +2,7 @@ version: '2.2'
 
 services:
   react:
-    container_name: react
+    container_name: armyreact
     build:
       context: .
       dockerfile: Dockerfile
