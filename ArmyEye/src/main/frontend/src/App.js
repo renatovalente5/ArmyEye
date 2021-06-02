@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import MapComponent from "./components/MapComponent";
 import GPS from "./components/GPS";
 import Helmet from "./components/Helmet";
+import ECG from "./components/ECG";
 import Comp2 from "./components/Comp2";
 
 
@@ -40,6 +41,7 @@ class App extends React.Component{
                 <li><Link to={'/map'} className="nav-link"><b>Map</b></Link></li>
                 <li><Link to={'/gps'} className="nav-link"><b>GPS</b></Link></li>
                 <li><Link to={'/helmet'} className="nav-link"><b>Helmet</b></Link></li>
+                <li><Link to={'/ecg'} className="nav-link"><b>ECG</b></Link></li>
                 <li><Link to={'/comp2'} className="nav-link"><b>Comp2</b></Link></li>
               </ul>
             </nav>
@@ -48,6 +50,7 @@ class App extends React.Component{
               <Route path='/map' component={MapComponent}/>
               <Route path='/gps' component={GPS}/>
               <Route path='/helmet' component={Helmet}/>
+              <Route path='/ecg' component={ECG}/>
               <Route path='/comp2' component={Comp2}/>
             </Switch>
           </div>

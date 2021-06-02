@@ -11,9 +11,9 @@ public class VitalJacket_ECG
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	public double ECG;
+	public String ECG;
 
-	public VitalJacket_ECG(double eCG) {
+	public VitalJacket_ECG(String eCG) {
 		super();
 		ECG = eCG;
 	}
@@ -22,11 +22,11 @@ public class VitalJacket_ECG
 
 	}
 
-	public double getECG() {
+	public String getECG() {
 		return ECG;
 	}
 
-	public void setECG(double eCG) {
+	public void setECG(String eCG) {
 		ECG = eCG;
 	}
 
