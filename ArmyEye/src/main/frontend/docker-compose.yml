@@ -6,6 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: 192.168.160.48:5000/esp21/react
     volumes:
       - '.:/app'
       - '/app/node_modules'

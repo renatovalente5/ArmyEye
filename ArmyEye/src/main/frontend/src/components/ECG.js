@@ -61,8 +61,7 @@ class ECG extends React.Component {
                         <tr key = {ecg.ECG}>
                             <td>{ecg.ECG}</td>
                         </tr>
-                    )
-                    }
+                    )}
                     </tbody>
                 </table>
             </div>

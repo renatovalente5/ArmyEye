@@ -27,6 +27,9 @@ public class ArmyEyeController {
     @Autowired
     private GPSRepository gpsRepository;
 
+    private final TopicProducer topicProducer;
+    private final TopicListener topicListener;
+
     public static LinkedList<GPS> getArmyGPS() {
         return armyGPS;
     }
@@ -135,6 +138,10 @@ public class ArmyEyeController {
             //passo.add(auxHelmet);
             movesArmyECG.add(auxECG);
             getECGRepository.save(auxECG);
+            if(Double.parseDouble(auxECG.ECG) > 130 ){
+                topicProducer.send("ecg", "ECG is too hight! - " + auxECG.ECG);
+            }
+
 
             count++;
         }
@@ -190,4 +197,11 @@ public class ArmyEyeController {
     public String getComp2(){
         return "componente 2, acrescentear conteúdos";
     }
+
+    // Obter a ultima mensagem recebida
+    @GetMapping("/msg")
+    public String getMsg(){
+        return topicListener.getMessage();
+    }
+
 }
