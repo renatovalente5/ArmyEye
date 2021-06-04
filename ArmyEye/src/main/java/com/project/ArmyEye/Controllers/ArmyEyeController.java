@@ -52,10 +52,6 @@ public class ArmyEyeController {
     private static LinkedList<Helmet> armyHelmetaux;
     private static LinkedList<VitalJacket_ECG> armyECGaux;
 
-    private static LinkedList<GPS> movesArmyGPS;
-    private static LinkedList<Helmet> movesArmyHelmet;
-    private static LinkedList<VitalJacket_ECG> movesArmyECG;
-
     private Map<String, LinkedList<GPS>> trackerArmyGPS = new HashMap<>();
 
     @GetMapping("/map")
@@ -68,48 +64,36 @@ public class ArmyEyeController {
             count=0;
             armyGPS = new LinkedList<>();
             //LinkedList<Comp1> auxList = new LinkedList<>();
-            List<String[]> gps = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
-            int i = 0;
-            for (String[] str : gps) {
-                if (i > 0 && i < 1000) {
-                    gpsRepository.save(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
-                    armyGPS.add(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
-                    System.out.println(str[0] + " " + str[1] + " " + str[2] + " " + str[3] + " " + str[4] + " " + str[5]);
-                }
-                i++;
-            }
+//            List<String[]> gps = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
+            List<GPS> gps = (List) getGpsRepository.findAll();
+            for (GPS str : gps) {
+                    armyGPS.add(str);
+                    System.out.println(str);
+           }
+
             System.out.println("--asasas---");
             armyGPSaux = armyGPS;
-            movesArmyGPS = new LinkedList<GPS>();
 
 //Helmet
             armyHelmet = new LinkedList<>();
-            List<String[]> helment = tsvr("src/main/java/com/project/ArmyEye/sample_data/Helmet.tsv");
-            i = 0;
-            for (String[] str : helment) {
-                if (i > 0 && i < 450) {
+            List<Helmet> helment = (List) getHelmetRepository.findAll();
+            for (Helmet str : helment) {
                     //gpsRepository.save(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
-                    armyHelmet.add(new Helmet(str[0], str[1], str[2], str[3], str[4], str[5], str[6], str[7], str[8], str[9]));
-                    System.out.println(str[0] + " " + str[1] + " " + str[2] + " " + str[3] + " " + str[4] + " " + str[5]);
+                    armyHelmet.add(str);
+                    System.out.println(str);
                 }
-                i++;
-            }
+
             armyHelmetaux = armyHelmet;
-            movesArmyHelmet = new LinkedList<Helmet>();
 
 //ECG
             armyECG = new LinkedList<>();
-            List<String[]> ecg = tsvr("src/main/java/com/project/ArmyEye/sample_data/VitalJacket_ECG.tsv");
-            i = 0;
-            for (String[] str : ecg) {
-                if (i > 0 && i < 1000) {
+            List<VitalJacket_ECG> ecg = (List) getECGRepository.findAll();
+            for (VitalJacket_ECG str : ecg) {
                     //gpsRepository.save(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
-                    armyECG.add(new VitalJacket_ECG(str[0]));
+                    armyECG.add(str);
                 }
-                i++;
-            }
+
             armyECGaux = armyECG;
-            movesArmyECG = new LinkedList<VitalJacket_ECG>();
 
             init = false;
         }else {
@@ -118,15 +102,12 @@ public class ArmyEyeController {
             armyGPSaux.removeFirst();
             System.out.println("--Deu Passo----" + auxGPS.getAltitude());
             passo.add(auxGPS);
-            movesArmyGPS.add(auxGPS);
             getGpsRepository.save(auxGPS);
 //Helmet
             if(count%10 == 0) {
                 Helmet auxHelmet = armyHelmetaux.getFirst();
                 System.out.println("--Helmet ----" + auxHelmet.CO);
                 armyHelmetaux.removeFirst();
-                //passo.add(auxHelmet);
-                movesArmyHelmet.add(auxHelmet);
                 getHelmetRepository.save(auxHelmet);
             }
 
@@ -134,8 +115,6 @@ public class ArmyEyeController {
             VitalJacket_ECG auxECG = armyECGaux.getFirst();
             System.out.println("--ECG ----" + auxECG.ECG);
             armyECGaux.removeFirst();
-            //passo.add(auxHelmet);
-            movesArmyECG.add(auxECG);
             getECGRepository.save(auxECG);
             if(Double.parseDouble(auxECG.ECG) > 130 ){
                 topicProducer.send("ecg", "ECG is too hight! - " + auxECG.ECG);
@@ -145,6 +124,32 @@ public class ArmyEyeController {
             count++;
         }
         return passo;
+    }
+
+    @GetMapping("/fill")
+    public void fill(){
+        log.info("Starting APP");
+        count = 0;
+        armyGPS = new LinkedList<>();
+        //LinkedList<Comp1> auxList = new LinkedList<>();
+        List<String[]> gps = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
+        for (String[] str : gps) {
+            gpsRepository.save(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
+            armyGPS.add(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
+            System.out.println(str[0] + " " + str[1] + " " + str[2] + " " + str[3] + " " + str[4] + " " + str[5]);
+        }
+        List<String[]> helmet = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
+        for (String[] str : helmet) {
+            getHelmetRepository.save(new Helmet(str[0], str[1], str[2], str[3], str[4], str[5], str[6], str[7], str[8], str[9]));
+        }
+//            List<String[]> battery = tsvr("src/main/java/com/project/ArmyEye/sample_data/Unit_Battery.tsv");
+//            for (String[] str : battery) {
+//                Repository.save(new Unit_Battery(str[0], str[1], str[2], str[3], str[4], str[5]));
+//            }
+        List<String[]> ecg = tsvr("src/main/java/com/project/ArmyEye/sample_data/VitalJacket_ECG.tsv");
+        for (String[] str : ecg) {
+            getECGRepository.save(new VitalJacket_ECG(str[0]));
+        }
     }
 
     public static List<String[]> tsvr(String test2) {
