@@ -66,16 +66,16 @@ public class ArmyEyeController {
             count=0;
             armyGPS = new LinkedList<>();
             //LinkedList<Comp1> auxList = new LinkedList<>();
-            //List<String[]> gps = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
+            List<String[]> gps = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
             int i = 0;
-//            for (String[] str : gps) {
-//                if (i > 0 && i < 1000) {
-                    gpsRepository.save(new GPS("a", "a", "a", "a", "a", "a"));
-//                    armyGPS.add(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
-//                    System.out.println(str[0] + " " + str[1] + " " + str[2] + " " + str[3] + " " + str[4] + " " + str[5]);
-//                }
-//                i++;
-//            }
+            for (String[] str : gps) {
+                if (i > 0 && i < 1000) {
+                    gpsRepository.save(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
+                    armyGPS.add(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
+                    System.out.println(str[0] + " " + str[1] + " " + str[2] + " " + str[3] + " " + str[4] + " " + str[5]);
+                }
+                i++;
+            }
             System.out.println("--asasas---");
             armyGPSaux = armyGPS;
             movesArmyGPS = new LinkedList<GPS>();
