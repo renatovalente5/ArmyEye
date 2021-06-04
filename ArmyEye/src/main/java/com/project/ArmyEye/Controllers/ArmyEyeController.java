@@ -58,7 +58,6 @@ public class ArmyEyeController {
 
     private Map<String, LinkedList<GPS>> trackerArmyGPS = new HashMap<>();
 
-
     @GetMapping("/map")
     @Scheduled(fixedRate = 10000)
     public LinkedList<Object> getMap(){
