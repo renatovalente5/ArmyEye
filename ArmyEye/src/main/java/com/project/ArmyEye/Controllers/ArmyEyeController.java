@@ -21,7 +21,7 @@ import java.util.*;
 @Log4j2
 @RequiredArgsConstructor
 //@RequestMapping("/myapp")
-@CrossOrigin("*")
+@CrossOrigin("http://192.168.160.87:21004")
 public class ArmyEyeController {
 
     @Autowired
@@ -56,6 +56,7 @@ public class ArmyEyeController {
     private Map<String, LinkedList<GPS>> trackerArmyGPS = new HashMap<>();
 
 
+    @CrossOrigin("http://192.168.160.87:21004")
     @GetMapping("/map")
     @Scheduled(fixedRate = 10000)
     public LinkedList<Object> getMap(){
@@ -158,6 +159,7 @@ public class ArmyEyeController {
         return Data;
     }
 
+    @CrossOrigin("http://192.168.160.87:21004")
     @GetMapping("/gps")
     @Scheduled(fixedRate = 100000)
     public Iterable<GPS> getComp1(){
