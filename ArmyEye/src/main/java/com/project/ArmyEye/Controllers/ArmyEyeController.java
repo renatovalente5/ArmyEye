@@ -21,7 +21,7 @@ import java.util.*;
 @Log4j2
 @RequiredArgsConstructor
 //@RequestMapping("/myapp")
-@CrossOrigin("http://192.168.160.87:21004")
+@CrossOrigin("*")
 public class ArmyEyeController {
 
     @Autowired
@@ -56,7 +56,6 @@ public class ArmyEyeController {
     private Map<String, LinkedList<GPS>> trackerArmyGPS = new HashMap<>();
 
 
-    @CrossOrigin("http://192.168.160.87:21004")
     @GetMapping("/map")
     @Scheduled(fixedRate = 10000)
     public LinkedList<Object> getMap(){
@@ -67,16 +66,16 @@ public class ArmyEyeController {
             count=0;
             armyGPS = new LinkedList<>();
             //LinkedList<Comp1> auxList = new LinkedList<>();
-            List<String[]> gps = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
+            //List<String[]> gps = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
             int i = 0;
-            for (String[] str : gps) {
-                if (i > 0 && i < 1000) {
+//            for (String[] str : gps) {
+//                if (i > 0 && i < 1000) {
                     gpsRepository.save(new GPS("a", "a", "a", "a", "a", "a"));
-                    armyGPS.add(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
-                    System.out.println(str[0] + " " + str[1] + " " + str[2] + " " + str[3] + " " + str[4] + " " + str[5]);
-                }
-                i++;
-            }
+//                    armyGPS.add(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
+//                    System.out.println(str[0] + " " + str[1] + " " + str[2] + " " + str[3] + " " + str[4] + " " + str[5]);
+//                }
+//                i++;
+//            }
             System.out.println("--asasas---");
             armyGPSaux = armyGPS;
             movesArmyGPS = new LinkedList<GPS>();
@@ -159,7 +158,6 @@ public class ArmyEyeController {
         return Data;
     }
 
-    @CrossOrigin("http://192.168.160.87:21004")
     @GetMapping("/gps")
     @Scheduled(fixedRate = 100000)
     public Iterable<GPS> getComp1(){
