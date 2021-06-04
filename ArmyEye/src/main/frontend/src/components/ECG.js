@@ -37,7 +37,7 @@ class ECG extends React.Component {
 
     async loadData() {
         try {
-            axios.get("http://localhost:8080/ecg").then(response => {
+            axios.get("http://192.168.160.87:21001/ecg").then(response => {
                 this.setState({ ECG: response.data })
             });
         } catch (e) {
