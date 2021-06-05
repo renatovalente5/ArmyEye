@@ -6,7 +6,6 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
 
-
 class MapComponent extends React.Component {
     constructor(props){
         super(props);
@@ -23,6 +22,7 @@ class MapComponent extends React.Component {
             message:"",
             lastMessage: ""
         }
+
         this.loadData = this.loadData.bind(this);
         this.loadMessages = this.loadMessages.bind(this);
     }
@@ -38,8 +38,8 @@ class MapComponent extends React.Component {
 
     async loadData() {
         try {
-            axios.get("http://192.168.160.87:21001/map").then(response => {
-                this.setState({ planes: response.data })
+            axios.get("http://localhost:8080/map").then(response => {
+                this.setState({ army: response.data })
             });
         } catch (e) {
             console.log(e);
