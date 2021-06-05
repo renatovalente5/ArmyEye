@@ -139,7 +139,7 @@ public class ArmyEyeController {
             armyGPS.add(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
             System.out.println(str[0] + " " + str[1] + " " + str[2] + " " + str[3] + " " + str[4] + " " + str[5]);
         }
-        List<String[]> helmet = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
+        List<String[]> helmet = tsvr("src/main/java/com/project/ArmyEye/sample_data/Helmet.tsv");
         for (String[] str : helmet) {
             getHelmetRepository.save(new Helmet(str[0], str[1], str[2], str[3], str[4], str[5], str[6], str[7], str[8], str[9]));
         }
