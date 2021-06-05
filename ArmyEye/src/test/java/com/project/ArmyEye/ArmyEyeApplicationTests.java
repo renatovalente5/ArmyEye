@@ -22,10 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import scala.concurrent.impl.Promise;
 
 import java.io.File;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @SpringBootTest
 @AutoConfigureMockMvc
