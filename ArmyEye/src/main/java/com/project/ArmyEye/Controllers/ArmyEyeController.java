@@ -65,7 +65,8 @@ public class ArmyEyeController {
             armyGPS = new LinkedList<>();
             //LinkedList<Comp1> auxList = new LinkedList<>();
 //            List<String[]> gps = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
-            List<GPS> gps = (List) getGpsRepository.findAll();
+            System.out.println(getGpsRepository.findAll());
+            Iterable<GPS> gps = getGpsRepository.findAll();
             for (GPS str : gps) {
                     armyGPS.add(str);
                     System.out.println(str);
