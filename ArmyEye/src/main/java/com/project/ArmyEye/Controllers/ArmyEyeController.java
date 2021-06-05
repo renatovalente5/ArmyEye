@@ -96,7 +96,7 @@ public class ArmyEyeController {
 
             armyECGaux = armyECG;
 
-            init = false;
+            //init = false;
         }else {
 //GPS
             GPS auxGPS = armyGPSaux.getFirst();
