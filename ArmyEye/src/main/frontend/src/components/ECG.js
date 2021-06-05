@@ -1,7 +1,7 @@
 import React, { Component, useState, SyntheticEvent  } from "react";
 import axios from "axios";
 import styled from 'styled-components';
-
+import {Line} from "react-chartjs-2";
 
 const H0 = styled.h1({
     fontSize: 25,
@@ -19,25 +19,43 @@ const H1 = styled.h1({
 });
 
 
+
 class ECG extends React.Component {
 
     constructor(props){
       super(props);
         this.state = {
-            ECG:[]
+            ECG:[],
+            labels: ['Now','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','...'],
+            datasets: [
+                {
+                    label: 'ECG',
+                    fill: false,
+                    lineTension: 0.5,
+                    backgroundColor: 'rgba(75,192,192,1)',
+                    borderColor: 'rgba(0,0,0,1)',
+                    borderWidth: 2,
+                    data: [120,146]
+                }
+            ]
         }
       this.loadData = this.loadData.bind(this);
+      this.loadData2 = this.loadData2.bind(this);
+
     }
 
     componentDidMount(){
       this.loadData();
-      setInterval(this.loadData, 100000);
+      this.loadData2();
+
+      setInterval(this.loadData, 10000);
+      setInterval(this.loadData2, 10000);
 
     }
 
     async loadData() {
         try {
-            axios.get("http://192.168.160.87:21001/ecg").then(response => {
+            axios.get("http://localhost:8080/ecg").then(response => {
                 this.setState({ ECG: response.data })
             });
         } catch (e) {
@@ -45,9 +63,32 @@ class ECG extends React.Component {
         }
     }
 
+    async loadData2() {
+        try {
+            axios.get("http://localhost:8080/ecg2").then(response => {
+                console.log(response.data);
+                this.setState({ datasets: [
+                        {
+                            label: 'Rainfall',
+                            fill: false,
+                            lineTension: 0.5,
+                            backgroundColor: 'rgba(75,192,192,1)',
+                            borderColor: 'rgba(0,0,0,1)',
+                            borderWidth: 2,
+                            data: response.data
+                        }
+                    ] })
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+
     render(){
         return(
             <div>
+                <Line data={this.state} />
                 <H0 className="text-center" > Health Army Status </H0>
 
                 <table className = "table table-striped">

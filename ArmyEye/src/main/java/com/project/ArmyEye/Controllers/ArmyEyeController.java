@@ -56,7 +56,7 @@ public class ArmyEyeController {
 
     @GetMapping("/map")
     @Scheduled(fixedRate = 10000)
-    public LinkedList<Object> getMap(){
+    public LinkedList<Object> getMap() throws InterruptedException {
         LinkedList<Object> passo = new LinkedList<Object>();
         if(init==true) {
 //GPS
@@ -200,6 +200,26 @@ public class ArmyEyeController {
         //System.out.println("---------------\n");
         return getECGRepository.findAll();
     }
+
+    @GetMapping("/ecg2")
+    @Scheduled(fixedRate = 100000)
+    public ArrayList<Integer> getECG2(){
+        log.info("Foi à BD buscar o ECG2!");
+        Iterable<VitalJacket_ECG> aux = getECGRepository.findAll();
+        //Integer[] array = new Integer[100000];
+        ArrayList<Integer> ret = new ArrayList<>();
+        for(VitalJacket_ECG t : aux) {
+            ret.add((int) Double.parseDouble(t.ECG));
+        }
+        Collections.reverse(ret);
+        //int[] array = Iterables.toArray(Iterable<? extends T> iterable, Class<T> int);
+        //String[] array = StreamSupport.stream(aux.spliterator(), false).toArray(String[]::new);
+        System.out.println("array2: "+ ret);
+        //System.out.println("Foi à BD buscar o Helmet!");
+        //System.out.println("---------------\n");
+        return ret;
+    }
+
 
 
     @GetMapping("/comp2")
