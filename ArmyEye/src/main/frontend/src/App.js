@@ -8,6 +8,7 @@ import GPS from "./components/GPS";
 import Helmet from "./components/Helmet";
 import ECG from "./components/ECG";
 import Comp2 from "./components/Comp2";
+import axios from "axios";
 
 
 
@@ -29,11 +30,20 @@ const H1 = styled.h1({
 });
 
 class App extends React.Component{
+
+  async loadData() {
+    try {
+      axios.get("http://192.168.160.87:21001/").then(response => {});
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   render() {
     return (
         <Router>
           <div>
-            <H0><i>ArmyEyer</i></H0>
+            <H0><i>ArmyEye</i></H0>
             <H1> The Army is coming...</H1>
 
             <nav className="navbar navbar-expand-lg navbar-light bg-light">

@@ -100,24 +100,26 @@ public class ArmyEyeController {
     public LinkedList<Object> getMap() throws InterruptedException {
         LinkedList<Object> passo = new LinkedList<Object>();
 //GPS
+        if(!armyGPSaux.isEmpty()) {
             GPS auxGPS = armyGPSaux.getFirst();
             armyGPSaux.removeFirst();
             System.out.println("--Deu Passo----" + auxGPS.getAltitude());
             passo.add(auxGPS);
-            getGpsRepository.save(auxGPS);
+//            getGpsRepository.save(auxGPS);
+        }
 //Helmet
             if(count%10 == 0) {
                 Helmet auxHelmet = armyHelmetaux.getFirst();
                 System.out.println("--Helmet ----" + auxHelmet.CO);
                 armyHelmetaux.removeFirst();
-                getHelmetRepository.save(auxHelmet);
+//                getHelmetRepository.save(auxHelmet);
             }
 
 //ECG
             VitalJacket_ECG auxECG = armyECGaux.getFirst();
             System.out.println("--ECG ----" + auxECG.ECG);
             armyECGaux.removeFirst();
-            getECGRepository.save(auxECG);
+//            getECGRepository.save(auxECG);
             if(Double.parseDouble(auxECG.ECG) > 130 ){
                 topicProducer.send("ecg", "ECG is too hight! - " + auxECG.ECG);
             }
