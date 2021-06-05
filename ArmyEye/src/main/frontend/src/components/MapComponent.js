@@ -38,7 +38,7 @@ class MapComponent extends React.Component {
 
     async loadData() {
         try {
-            axios.get("http://localhost:8080/map").then(response => {
+            axios.get("http://192.168.160.87:21001/map").then(response => {
                 this.setState({ army: response.data })
             });
         } catch (e) {
