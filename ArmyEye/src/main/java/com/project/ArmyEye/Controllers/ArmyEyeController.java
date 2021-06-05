@@ -55,56 +55,51 @@ public class ArmyEyeController {
 
     private Map<String, LinkedList<GPS>> trackerArmyGPS = new HashMap<>();
 
+    @GetMapping("/")
+    public void fillLists(){
+
+        log.info("Starting APP");
+        count=0;
+        armyGPS = new LinkedList<>();
+        //LinkedList<Comp1> auxList = new LinkedList<>();
+//            List<String[]> gps = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
+        //System.out.println(getGpsRepository.findAll());
+        Iterable<GPS> gps = getGpsRepository.findAll();
+        for (GPS str : gps) {
+            armyGPS.add(str);
+            //System.out.println(str);
+        }
+
+        System.out.println("--asasas---");
+        armyGPSaux = armyGPS;
+
+//Helmet
+        armyHelmet = new LinkedList<>();
+        List<Helmet> helment = (List) getHelmetRepository.findAll();
+        for (Helmet str : helment) {
+            //gpsRepository.save(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
+            armyHelmet.add(str);
+           // System.out.println(str);
+        }
+
+        armyHelmetaux = armyHelmet;
+
+//ECG
+        armyECG = new LinkedList<>();
+        List<VitalJacket_ECG> ecg = (List) getECGRepository.findAll();
+        for (VitalJacket_ECG str : ecg) {
+            //gpsRepository.save(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
+            armyECG.add(str);
+        }
+
+        armyECGaux = armyECG;
+    }
+
     @GetMapping("/map")
     @Scheduled(fixedRate = 10000)
     public LinkedList<Object> getMap() throws InterruptedException {
         LinkedList<Object> passo = new LinkedList<Object>();
-        if(init==true) {
 //GPS
-            log.info("Starting APP");
-            count=0;
-            armyGPS = new LinkedList<>();
-            //LinkedList<Comp1> auxList = new LinkedList<>();
-//            List<String[]> gps = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
-            System.out.println(getGpsRepository.findAll());
-            Iterable<GPS> gps = getGpsRepository.findAll();
-            for (GPS str : gps) {
-                    armyGPS.add(str);
-                    System.out.println(str);
-           }
-
-            System.out.println("--asasas---");
-            armyGPSaux = armyGPS;
-
-//Helmet
-            armyHelmet = new LinkedList<>();
-            List<Helmet> helment = (List) getHelmetRepository.findAll();
-            for (Helmet str : helment) {
-                    //gpsRepository.save(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
-                    armyHelmet.add(str);
-                    System.out.println(str);
-                }
-
-            armyHelmetaux = armyHelmet;
-
-//ECG
-            armyECG = new LinkedList<>();
-            List<VitalJacket_ECG> ecg = (List) getECGRepository.findAll();
-            for (VitalJacket_ECG str : ecg) {
-                    //gpsRepository.save(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
-                    armyECG.add(str);
-                }
-
-            armyECGaux = armyECG;
-
-            init = false;
-        }else {
-//GPS
-
-            armyGPS= (LinkedList<GPS>) gpsRepository.findAll();
-            armyHelmet= (LinkedList<Helmet>) getHelmetRepository.findAll();
-            armyECG= (LinkedList<VitalJacket_ECG>) getECGRepository.findAll();
-
             GPS auxGPS = armyGPSaux.getFirst();
             armyGPSaux.removeFirst();
             System.out.println("--Deu Passo----" + auxGPS.getAltitude());
@@ -128,9 +123,9 @@ public class ArmyEyeController {
             }
 
 
-            if(armyECGaux.isEmpty() || armyGPSaux.isEmpty() || armyHelmetaux.isEmpty()) init=true;
+            if(armyECGaux.isEmpty() || armyGPSaux.isEmpty() || armyHelmetaux.isEmpty()) fillLists();
             count++;
-        }
+
         return passo;
     }
 
