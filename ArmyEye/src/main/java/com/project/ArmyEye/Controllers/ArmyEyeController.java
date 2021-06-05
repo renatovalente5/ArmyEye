@@ -42,7 +42,7 @@ public class ArmyEyeController {
     private final HelmetRepository getHelmetRepository;
     private final ECGRepository getECGRepository;
 
-    private boolean init = false;
+    private boolean init = true;
     private int count = 0;
     private static LinkedList<GPS> armyGPS;
     private static LinkedList<Helmet> armyHelmet;
@@ -96,9 +96,10 @@ public class ArmyEyeController {
 
             armyECGaux = armyECG;
 
-            //init = false;
+            init = false;
         }else {
 //GPS
+
             armyGPS= (LinkedList<GPS>) gpsRepository.findAll();
             armyHelmet= (LinkedList<Helmet>) getHelmetRepository.findAll();
             armyECG= (LinkedList<VitalJacket_ECG>) getECGRepository.findAll();
@@ -126,6 +127,7 @@ public class ArmyEyeController {
             }
 
 
+            if(armyECGaux.isEmpty() || armyGPSaux.isEmpty() || armyHelmetaux.isEmpty()) init=true;
             count++;
         }
         return passo;
