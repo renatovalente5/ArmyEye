@@ -1,9 +1,25 @@
 package com.project.ArmyEye;
 
+
+import static org.hamcrest.Matchers.containsString;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.project.ArmyEye.Controllers.ArmyEyeController;
 import com.project.ArmyEye.Models.GPS;
+import com.project.ArmyEye.Models.Helmet;
+import com.project.ArmyEye.Models.VitalJacket_ECG;
+import com.project.ArmyEye.repository.ECGRepository;
+import com.project.ArmyEye.repository.GPSRepository;
+import com.project.ArmyEye.repository.HelmetRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import scala.concurrent.impl.Promise;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -12,7 +28,18 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @SpringBootTest
+@AutoConfigureMockMvc
 class ArmyEyeApplicationTests {
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Autowired
+	private GPSRepository gpsRepository;
+	@Autowired
+	private ECGRepository ecgRepository;
+	@Autowired
+	private HelmetRepository helmetRepository;
 
 	@Test
 	void contextLoads() {
@@ -87,5 +114,41 @@ class ArmyEyeApplicationTests {
 	void fileVitalOthersValid(){
 		List<String[]> l=ArmyEyeController.tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
 		assert(l.size()!=0);
+	}
+
+	@Test
+	public void getReact() throws Exception {
+		System.out.println("Request React");
+		this.mockMvc.perform(get("http://192.168.160.87:21004/")).andDo(print()).andExpect(status().isOk());
+	}
+
+	@Test
+	public void getSpring() throws Exception {
+		System.out.println("Request Spring");
+		this.mockMvc.perform(get("http://192.168.160.87:21001/")).andDo(print()).andExpect(status().isOk());
+	}
+
+	@Test
+	public void getGPS() throws Exception {
+		System.out.println("Request GPS");
+		this.mockMvc.perform(get("http://192.168.160.87:21001/gps")).andDo(print()).andExpect(status().isOk());
+	}
+
+	@Test
+	public void emptyGPS() throws Exception {
+		List<GPS> testlist= (List<GPS>) gpsRepository.findAll();
+		assert (testlist.size()>0);
+	}
+
+	@Test
+	public void emptyECG() throws Exception {
+		List<VitalJacket_ECG> testlist= (List<VitalJacket_ECG>) ecgRepository.findAll();
+		assert (testlist.size()>0);
+	}
+
+	@Test
+	public void emptyHelmet() throws Exception {
+		List<Helmet> testlist= (List<Helmet>) helmetRepository.findAll();
+		assert (testlist.size()>0);
 	}
 }
