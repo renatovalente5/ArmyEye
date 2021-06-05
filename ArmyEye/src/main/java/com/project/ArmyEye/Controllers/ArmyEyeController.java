@@ -44,6 +44,7 @@ public class ArmyEyeController {
 
     private boolean init = true;
     private int count = 0;
+    private int sentECGs=1;
     private static LinkedList<GPS> armyGPS;
     private static LinkedList<Helmet> armyHelmet;
     private static LinkedList<VitalJacket_ECG> armyECG;
@@ -207,12 +208,14 @@ public class ArmyEyeController {
     @Scheduled(fixedRate = 100000)
     public ArrayList<Integer> getECG2(){
         log.info("Foi à BD buscar o ECG2!");
-        Iterable<VitalJacket_ECG> aux = getECGRepository.findAll();
+        ArrayList<VitalJacket_ECG> aux = (ArrayList<VitalJacket_ECG>) getECGRepository.findAll();
+
         //Integer[] array = new Integer[100000];
         ArrayList<Integer> ret = new ArrayList<>();
-        for(VitalJacket_ECG t : aux) {
-            ret.add((int) Double.parseDouble(t.ECG));
+        for(int i=0;i<sentECGs; i++) {
+            ret.add((int) Double.parseDouble(aux.get(i).ECG));
         }
+        sentECGs++;
         Collections.reverse(ret);
         //int[] array = Iterables.toArray(Iterable<? extends T> iterable, Class<T> int);
         //String[] array = StreamSupport.stream(aux.spliterator(), false).toArray(String[]::new);
