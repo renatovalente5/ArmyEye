@@ -24,6 +24,7 @@ public class TopicListener {
 
     //private static final Logger logger = LogManager.getLogger(ArmyEyeController.class);
     private String msg = "";
+    private String msgCO = "";
 
     @KafkaListener(topics = "ecg", groupId = "group_id")
     public void consume(ConsumerRecord<String, String> payload){
@@ -35,7 +36,19 @@ public class TopicListener {
         msg = payload.value();
     }
 
+    @KafkaListener(topics = "co", groupId = "group_id")
+    public void consumeCO(ConsumerRecord<String, String> payload){
+        log.info("Topic: {}", "plane");
+        // logger.info("key: {}", payload.key());
+        // logger.info("Headers: {}", payload.headers());
+        // logger.info("Partion: {}", payload.partition());
+        log.info("Order: {}", payload.value());
+        msgCO = payload.value();
+    }
+
     public String getMessage(){
         return msg;
     }
+
+    public String getMessageCO() { return msgCO; }
 }

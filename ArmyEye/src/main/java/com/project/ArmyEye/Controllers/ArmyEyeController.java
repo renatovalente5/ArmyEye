@@ -45,6 +45,9 @@ public class ArmyEyeController {
     private boolean init = true;
     private int count = 0;
     private int sentECGs=1;
+    private int sentHelmet=1;
+    private int sentGPS=1;
+    private GPS passos = new GPS();
     private static LinkedList<GPS> armyGPS;
     private static LinkedList<Helmet> armyHelmet;
     private static LinkedList<VitalJacket_ECG> armyECG;
@@ -59,7 +62,6 @@ public class ArmyEyeController {
     public void fillLists(){
 
         log.info("Starting APP");
-        count=0;
         armyGPS = new LinkedList<>();
         //LinkedList<Comp1> auxList = new LinkedList<>();
 //            List<String[]> gps = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
@@ -97,36 +99,16 @@ public class ArmyEyeController {
 
     @GetMapping("/map")
     @Scheduled(fixedRate = 10000)
-    public LinkedList<Object> getMap() throws InterruptedException {
-        LinkedList<Object> passo = new LinkedList<Object>();
-//GPS
-        if(!armyGPSaux.isEmpty()) {
-            GPS auxGPS = armyGPSaux.getFirst();
-            armyGPSaux.removeFirst();
-            System.out.println("--Deu Passo----" + auxGPS.getAltitude());
-            passo.add(auxGPS);
-//            getGpsRepository.save(auxGPS);
+    public LinkedList<GPS> getMap() throws InterruptedException {
+
+        LinkedList<GPS> passo = new LinkedList<GPS>();
+        passo.add(passos);
+        if(sentECGs==1000 || sentGPS==600 || sentHelmet==50){
+            //fillLists();
+            sentECGs=1;
+            sentHelmet=1;
+            sentGPS=1;
         }
-//Helmet
-            if(count%10 == 0) {
-                Helmet auxHelmet = armyHelmetaux.getFirst();
-                System.out.println("--Helmet ----" + auxHelmet.CO);
-                armyHelmetaux.removeFirst();
-//                getHelmetRepository.save(auxHelmet);
-            }
-
-//ECG
-            VitalJacket_ECG auxECG = armyECGaux.getFirst();
-            System.out.println("--ECG ----" + auxECG.ECG);
-            armyECGaux.removeFirst();
-//            getECGRepository.save(auxECG);
-            if(Double.parseDouble(auxECG.ECG) > 130 ){
-                topicProducer.send("ecg", "ECG is too hight! - " + auxECG.ECG);
-            }
-
-
-            if(armyECGaux.isEmpty() || armyGPSaux.isEmpty() || armyHelmetaux.isEmpty()) fillLists();
-            count++;
 
         return passo;
     }
@@ -134,7 +116,6 @@ public class ArmyEyeController {
     @GetMapping("/fill")
     public void fill(){
         log.info("Starting APP");
-        count = 0;
         armyGPS = new LinkedList<>();
         //LinkedList<Comp1> auxList = new LinkedList<>();
         List<String[]> gps = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
@@ -176,29 +157,60 @@ public class ArmyEyeController {
 
     @GetMapping("/gps")
     @Scheduled(fixedRate = 100000)
-    public Iterable<GPS> getComp1(){
+    public ArrayList<GPS> getComp1(){
         log.info("Foi à BD buscar o GPS!");
-        //System.out.println("Foi à BD buscar o GPS!");
-        //System.out.println("---------------\n");
-        return getGpsRepository.findAll();
+        ArrayList<GPS> aux = (ArrayList<GPS>) getGpsRepository.findAll();
+
+        ArrayList<GPS> ret = new ArrayList<>();
+        for(int i=0;i<sentECGs; i++) {
+            ret.add(aux.get(i));
+        }
+        sentGPS++;
+        Collections.reverse(ret);
+        System.out.println("PASSO DADO!");
+
+        passos = ret.get(0);
+
+        return ret;
     }
 
     @GetMapping("/helmet")
     @Scheduled(fixedRate = 100000)
-    public Iterable<Helmet> getHelmet(){
+    public ArrayList<Helmet> getHelmet(){
         log.info("Foi à BD buscar o Helmet!");
-        //System.out.println("Foi à BD buscar o Helmet!");
-        //System.out.println("---------------\n");
-        return getHelmetRepository.findAll();
+        ArrayList<Helmet> aux = (ArrayList<Helmet>) getHelmetRepository.findAll();
+
+        ArrayList<Helmet> ret = new ArrayList<>();
+        for(int i=0;i<sentHelmet; i++) {
+            ret.add(aux.get(i));
+        }
+        if(count%10==0) {
+            sentHelmet++;
+        }
+        count++;
+
+        Collections.reverse(ret);
+        System.out.println("arrayHelmet: " + ret.get(0).CO);
+        if((int) Double.parseDouble(ret.get(0).CO) > 0 ){
+            topicProducer.send("co", "CO is too hight! - " + ret.get(0).CO);
+        }
+        return ret;
     }
 
     @GetMapping("/ecg")
     @Scheduled(fixedRate = 100000)
-    public Iterable<VitalJacket_ECG> getECG(){
+    public ArrayList<VitalJacket_ECG> getECG(){
         log.info("Foi à BD buscar o ECG!");
-        //System.out.println("Foi à BD buscar o Helmet!");
-        //System.out.println("---------------\n");
-        return getECGRepository.findAll();
+        ArrayList<VitalJacket_ECG> aux = (ArrayList<VitalJacket_ECG>) getECGRepository.findAll();
+
+        ArrayList<VitalJacket_ECG> ret = new ArrayList<>();
+        for(int i=0;i<sentECGs; i++) {
+            ret.add(aux.get(i));
+        }
+        Collections.reverse(ret);
+
+        return ret;
+
     }
 
     @GetMapping("/ecg2")
@@ -207,18 +219,18 @@ public class ArmyEyeController {
         log.info("Foi à BD buscar o ECG2!");
         ArrayList<VitalJacket_ECG> aux = (ArrayList<VitalJacket_ECG>) getECGRepository.findAll();
 
-        //Integer[] array = new Integer[100000];
         ArrayList<Integer> ret = new ArrayList<>();
         for(int i=0;i<sentECGs; i++) {
             ret.add((int) Double.parseDouble(aux.get(i).ECG));
         }
         sentECGs++;
         Collections.reverse(ret);
-        //int[] array = Iterables.toArray(Iterable<? extends T> iterable, Class<T> int);
-        //String[] array = StreamSupport.stream(aux.spliterator(), false).toArray(String[]::new);
         System.out.println("array2: "+ ret);
-        //System.out.println("Foi à BD buscar o Helmet!");
-        //System.out.println("---------------\n");
+
+        if(ret.get(0) > 124 ){
+            topicProducer.send("ecg", "ECG is too hight! - " + ret.get(0));
+        }
+
         return ret;
     }
 
@@ -233,6 +245,11 @@ public class ArmyEyeController {
     @GetMapping("/msg")
     public String getMsg(){
         return topicListener.getMessage();
+    }
+
+    @GetMapping("/msgCO")
+    public String getMsgCO(){
+        return topicListener.getMessageCO();
     }
 
 }

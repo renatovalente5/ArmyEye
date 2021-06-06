@@ -46,13 +46,13 @@ class Helmet extends React.Component {
 
     componentDidMount(){
       this.loadData();
-      setInterval(this.loadData, 100000);
+      setInterval(this.loadData, 10000);
 
     }
 
     async loadData() {
         try {
-            axios.get("http://192.168.160.87:21001/helmet").then(response => {
+            axios.get("http://localhost:8080/helmet").then(response => {
                 this.setState({ helmet: response.data })
             });
         } catch (e) {
@@ -63,7 +63,7 @@ class Helmet extends React.Component {
     render(){
         return(
             <div>
-                <Line
+{/*                <Line
                     data={state}
                     options={{
                         title:{
@@ -76,7 +76,7 @@ class Helmet extends React.Component {
                             position:'right'
                         }
                     }}
-                />
+                />*/}
                 <H0 className="text-center" > Army Status </H0>
 
                 <table className = "table table-striped">
@@ -96,18 +96,35 @@ class Helmet extends React.Component {
                     </tr>
                     </thead>
                     <tbody id="myTable"> { this.state.helmet.map( hel =>
-                        <tr key = {hel.Timestampms}>
-                            <td>{hel.TimestampUTC}</td>
-                            <td>{hel.Timestampms}</td>
-                            <td>{hel.Altitude}</td>
-                            <td>{hel.CO}</td>
-                            <td>{hel.NO2}</td>
-                            <td>{hel.Environmentaltemperature}</td>
-                            <td>{hel.Atmosphericpressure}</td>
-                            <td>{hel.Humidity}</td>
-                            <td>{hel.Luminosity}</td>
-                            <td>{hel.Battery}</td>
-                        </tr>
+                    {
+                        if(hel.CO > 0.0){
+                            return  <tr key = {hel.Timestampms}>
+                                <td>{hel.TimestampUTC}</td>
+                                <td>{hel.Timestampms}</td>
+                                <td>{hel.Altitude}</td>
+                                <td style={{ color:'red', fontWeight: 'bold'}}>{hel.CO}</td>
+                                <td>{hel.NO2}</td>
+                                <td>{hel.Environmentaltemperature}</td>
+                                <td>{hel.Atmosphericpressure}</td>
+                                <td>{hel.Humidity}</td>
+                                <td>{hel.Luminosity}</td>
+                                <td>{hel.Battery}</td>
+                            </tr>
+                        } else{
+                            return  <tr key = {hel.Timestampms}>
+                                <td>{hel.TimestampUTC}</td>
+                                <td>{hel.Timestampms}</td>
+                                <td>{hel.Altitude}</td>
+                                <td>{hel.CO}</td>
+                                <td>{hel.NO2}</td>
+                                <td>{hel.Environmentaltemperature}</td>
+                                <td>{hel.Atmosphericpressure}</td>
+                                <td>{hel.Humidity}</td>
+                                <td>{hel.Luminosity}</td>
+                                <td>{hel.Battery}</td>
+                            </tr>
+                        }
+                    }
                     )
                     }
                     </tbody>

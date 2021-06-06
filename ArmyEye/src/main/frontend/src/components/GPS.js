@@ -15,9 +15,8 @@ const H1 = styled.h1({
     paddingBottom: 30,
     fontSize: 12,
     paddingTop: 0,
-    textAlign: "center"
+    textAlign: "center",
 });
-
 
 class GPS extends React.Component {
 
@@ -37,7 +36,7 @@ class GPS extends React.Component {
 
     async loadData() {
         try {
-            axios.get("http://192.168.160.87:21001/gps").then(response => {
+            axios.get("http://localhost:8080/gps").then(response => {
                 this.setState({ armys: response.data })
             });
         } catch (e) {

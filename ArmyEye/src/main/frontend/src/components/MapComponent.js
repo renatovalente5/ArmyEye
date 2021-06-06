@@ -20,25 +20,30 @@ class MapComponent extends React.Component {
             },
             mounted: false,
             message:"",
-            lastMessage: ""
+            lastMessage: "",
+            messageCO:"",
+            lastMessageCO: ""
         }
 
         this.loadData = this.loadData.bind(this);
         this.loadMessages = this.loadMessages.bind(this);
+        this.loadMessagesCO = this.loadMessagesCO.bind(this);
     }
 
     componentDidMount(){
         this.loadData();
         this.loadMessages();
+        this.loadMessagesCO();
         setInterval(this.loadData, 1000);
         setInterval(this.loadMessages, 1000);
+        setInterval(this.loadMessagesCO, 1000);
         this.setState({ mounted: true })
 
     }
 
     async loadData() {
         try {
-            axios.get("http://192.168.160.87:21001/map").then(response => {
+            axios.get("http://localhost:8080/map").then(response => {
                 this.setState({ army: response.data })
             });
         } catch (e) {
@@ -48,7 +53,7 @@ class MapComponent extends React.Component {
 
     async loadMessages() {
         try {
-            axios.get("http://192.168.160.87:21001/msg").then(response => {
+            axios.get("http://localhost:8080/msg").then(response => {
                 this.setState({ message: response.data })
             });
         } catch (e) {
@@ -60,13 +65,28 @@ class MapComponent extends React.Component {
         }
     }
 
+    async loadMessagesCO() {
+        try {
+            axios.get("http://localhost:8080/msgCO").then(response => {
+                this.setState({ messageCO: response.data })
+            });
+        } catch (e) {
+            console.log(e);
+        }
+        if (this.state.lastMessageCO !== this.state.messageCO && this.state.messageCO !== ""){
+            NotificationManager.error('',this.state.messageCO ,4000);
+            this.state.lastMessageCO = this.state.messageCO;
+        }
+    }
+
     render(){
         const { mounted } = this.state
         return(
             <div >
                 <NotificationContainer/>
 
-                <p>{this.state.army.latitude}</p>
+                {/*<p>{this.state.army.latitude}</p>*/}
+
                 <ReactMapGL {...this.state.viewport}
                             onViewportChange={(viewport) => {
                                 if (mounted) { this.setState({ viewport }) }

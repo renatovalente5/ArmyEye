@@ -26,7 +26,7 @@ class ECG extends React.Component {
       super(props);
         this.state = {
             ECG:[],
-            labels: ['Now','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','...'],
+            labels: ['Now','','','','','','','','','','','','','','','','','','','','','','','','','...'],
             datasets: [
                 {
                     label: 'ECG',
@@ -55,7 +55,7 @@ class ECG extends React.Component {
 
     async loadData() {
         try {
-            axios.get("http://192.168.160.87:21001/ecg").then(response => {
+            axios.get("http://localhost:8080/ecg").then(response => {
                 this.setState({ ECG: response.data })
             });
         } catch (e) {
@@ -65,11 +65,11 @@ class ECG extends React.Component {
 
     async loadData2() {
         try {
-            axios.get("http://192.168.160.87:21001/ecg2").then(response => {
+            axios.get("http://localhost:8080/ecg2").then(response => {
                 console.log(response.data);
                 this.setState({ datasets: [
                         {
-                            label: 'Rainfall',
+                            label: 'ECG',
                             fill: false,
                             lineTension: 0.5,
                             backgroundColor: 'rgba(75,192,192,1)',
@@ -88,8 +88,8 @@ class ECG extends React.Component {
     render(){
         return(
             <div>
-                <Line data={this.state} />
                 <H0 className="text-center" > Health Army Status </H0>
+                <Line data={this.state} />
 
                 <table className = "table table-striped">
                     <thead>
@@ -99,9 +99,13 @@ class ECG extends React.Component {
                     </tr>
                     </thead>
                     <tbody id="myTable"> { this.state.ECG.map( ecg =>
-                        <tr key = {ecg.ECG}>
-                            <td>{ecg.ECG}</td>
-                        </tr>
+                    {
+                        if(ecg.ECG > 124.0){
+                            return <tr style={{ color:'red', fontWeight: 'bold'}} key = {ecg.ECG}><td>{ecg.ECG}</td></tr>
+                        } else{
+                            return <tr style={{ color:'blue', fontWeight: 'bold'}} key = {ecg.ECG}><td>{ecg.ECG}</td></tr>
+                        }
+                    }
                     )}
                     </tbody>
                 </table>
