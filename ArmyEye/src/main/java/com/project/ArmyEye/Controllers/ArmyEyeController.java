@@ -162,13 +162,14 @@ public class ArmyEyeController {
         ArrayList<GPS> aux = (ArrayList<GPS>) getGpsRepository.findAll();
 
         ArrayList<GPS> ret = new ArrayList<>();
-        for(int i=0;i<sentECGs; i++) {
+        for(int i=0;i<sentGPS; i++) {
             ret.add(aux.get(i));
         }
         sentGPS++;
         Collections.reverse(ret);
         System.out.println("PASSO DADO!");
 
+        System.out.println(ret);
         passos = ret.get(0);
 
         return ret;
