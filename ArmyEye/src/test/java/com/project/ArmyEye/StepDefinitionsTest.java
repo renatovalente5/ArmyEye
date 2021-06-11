@@ -14,7 +14,7 @@ class IsItFriday{
     }
 }
 
-public class StepDefinitionsTest extends SpringIntegrationTest {
+public class StepDefinitionsTest extends com.project.ArmyEye.SpringIntegrationTest {
     private String today;
     private String actualAnswer;
 

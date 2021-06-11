@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @RestController
 @Log4j2
@@ -23,6 +25,8 @@ import java.util.*;
 //@RequestMapping("/myapp")
 @CrossOrigin("*")
 public class ArmyEyeController {
+
+    private static final Logger LOG = Logger.getLogger(ArmyEyeController.class.getName());
 
     @Autowired
     private GPSRepository gpsRepository;
@@ -171,6 +175,9 @@ public class ArmyEyeController {
 
         System.out.println(ret);
         passos = ret.get(0);
+        String response = "Passo ->" + ret.get(0);
+        LOG.log(Level.INFO, response);
+
 
         return ret;
     }
