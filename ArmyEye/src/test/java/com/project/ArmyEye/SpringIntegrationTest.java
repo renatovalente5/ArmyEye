@@ -33,16 +33,52 @@ public class SpringIntegrationTest {
 
 
     @Test
-    void existValueECGinBD2() throws Exception {
-        assert("1"=="1");
-    }
-
-    @Test
     void existValueECGinBD() throws Exception {
 
         List<VitalJacket_ECG> ecg_repo = (List) ecgRepository.findAll();
         assert((ecg_repo.get(0).getECG()).equals("125.0"));
     }
 
+    @Test
+    void existValueGPSinBD() throws Exception {
+
+        List<GPS> ecg_repo = (List) gpsRepository.findAll();
+        assert((ecg_repo.get(0).getAltitude()).equals("0.0"));
+    }
+
+    @Test
+    void existValueHelmetinBD() throws Exception {
+
+        List<Helmet> ecg_repo = (List) helmetRepository.findAll();
+        assert((ecg_repo.get(0).getCO()).equals("0.0"));
+    }
+
+    @Test
+    void existValueHelmet2inBD() throws Exception {
+
+        List<Helmet> ecg_repo = (List) helmetRepository.findAll();
+        assert((ecg_repo.get(0).getBattery()).equals("93.0"));
+    }
+
+    @Test
+    void existValueHelmet3inBD() throws Exception {
+
+        List<Helmet> ecg_repo = (List) helmetRepository.findAll();
+        assert((ecg_repo.get(0).getNO2()).equals("-1.0"));
+    }
+
+    @Test
+    void existValueHelmet4inBD() throws Exception {
+
+        List<Helmet> ecg_repo = (List) helmetRepository.findAll();
+        assert((ecg_repo.get(0).getLuminosity()).equals("100.0"));
+    }
+
+    @Test
+    void existValueHelmet5inBD() throws Exception {
+
+        List<Helmet> ecg_repo = (List) helmetRepository.findAll();
+        assert((ecg_repo.get(0).getHumidity()).equals("44.0"));
+    }
 
 }
