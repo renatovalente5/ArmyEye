@@ -52,7 +52,7 @@ class Helmet extends React.Component {
 
     async loadData() {
         try {
-            axios.get("http://localhost:8080/helmet").then(response => {
+            axios.get("http://192.168.160.87:21001/helmet").then(response => {
                 console.log("ola Helmet")
                 this.setState({ helmet: response.data })
             });

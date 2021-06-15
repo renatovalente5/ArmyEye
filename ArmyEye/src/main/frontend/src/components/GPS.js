@@ -36,7 +36,7 @@ class GPS extends React.Component {
 
     async loadData() {
         try {
-            axios.get("http://localhost:8080/gps").then(response => {
+            axios.get("http://192.168.160.87:21001/gps").then(response => {
                 this.setState({ armys: response.data })
             });
         } catch (e) {

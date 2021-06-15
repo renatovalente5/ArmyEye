@@ -35,7 +35,7 @@ class ECG extends React.Component {
                     backgroundColor: 'rgba(75,192,192,1)',
                     borderColor: 'rgba(0,0,0,1)',
                     borderWidth: 2,
-                    data: [120,146]
+                    data: [125,127]
                 }
             ]
         }
@@ -55,7 +55,7 @@ class ECG extends React.Component {
 
     async loadData() {
         try {
-            axios.get("http://localhost:8080/ecg").then(response => {
+            axios.get("http://192.168.160.87:21001/ecg").then(response => {
                 this.setState({ ECG: response.data })
             });
         } catch (e) {
@@ -65,7 +65,7 @@ class ECG extends React.Component {
 
     async loadData2() {
         try {
-            axios.get("http://localhost:8080/ecg2").then(response => {
+            axios.get("http://192.168.160.87:21001/ecg2").then(response => {
                 console.log(response.data);
                 this.setState({ datasets: [
                         {

@@ -37,7 +37,7 @@ class Initial extends React.Component {
 
     async loadData() {
         try {
-            axios.get("http://localhost:8080/").then(response => {
+            axios.get("http://192.168.160.87:21001/").then(response => {
                 this.setState({ initial: response.data })
             });
         } catch (e) {

@@ -43,7 +43,7 @@ class MapComponent extends React.Component {
 
     async loadData() {
         try {
-            axios.get("http://localhost:8080/map").then(response => {
+            axios.get("http://192.168.160.87:21001/map").then(response => {
                 this.setState({ army: response.data })
             });
         } catch (e) {
@@ -53,7 +53,7 @@ class MapComponent extends React.Component {
 
     async loadMessages() {
         try {
-            axios.get("http://localhost:8080/msg").then(response => {
+            axios.get("http://192.168.160.87:21001/msg").then(response => {
                 this.setState({ message: response.data })
             });
         } catch (e) {
@@ -67,7 +67,7 @@ class MapComponent extends React.Component {
 
     async loadMessagesCO() {
         try {
-            axios.get("http://localhost:8080/msgCO").then(response => {
+            axios.get("http://192.168.160.87:21001/msgCO").then(response => {
                 this.setState({ messageCO: response.data })
             });
         } catch (e) {
