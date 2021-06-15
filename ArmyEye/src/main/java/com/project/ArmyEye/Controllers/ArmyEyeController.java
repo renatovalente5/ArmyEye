@@ -153,10 +153,11 @@ public class ArmyEyeController {
 
         if(sentHelmet >= aux.size()) { sentHelmet = 1; countHelmet++; }
         ArrayList<Helmet> ret = new ArrayList<>();
-        if(countHelmet >= 1){ ret.addAll(aux); }
+
         for(int i=0;i<sentHelmet; i++) {
             ret.add(aux.get(i));
         }
+        if(countHelmet >= 1){ ret.addAll(aux); }
 /*        if(count%10==0) {
             sentHelmet++;
         }
@@ -195,16 +196,18 @@ public class ArmyEyeController {
 
         if(sentECGs >= aux.size()) { countECG++; }
         ArrayList<Integer> ret = new ArrayList<>();
-        if(countECG >= 1) {
-            for(int i=0;i<sentECGs; i++) {
-                ret.add((int) Double.parseDouble(aux.get(i).ECG));
-            }
-        }
-        if(sentECGs >= aux.size()) { sentECGs = 1; }
+
         for(int i=0;i<sentECGs; i++) {
             ret.add((int) Double.parseDouble(aux.get(i).ECG));
         }
+        if(countECG >= 1) {
+            for(int i=0;i<aux.size(); i++) {
+                ret.add((int) Double.parseDouble(aux.get(i).ECG));
+            }
+        }
         sentECGs++;
+        if(sentECGs >= aux.size()) { sentECGs = 1; }
+
         Collections.reverse(ret);
         System.out.println("ECG's: "+ ret);
 
