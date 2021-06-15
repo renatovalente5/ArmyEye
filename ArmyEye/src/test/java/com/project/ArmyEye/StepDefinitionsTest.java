@@ -22,7 +22,7 @@ public class StepDefinitionsTest extends com.project.ArmyEye.SpringIntegrationTe
     private String value;
     private boolean b;
 
-    @Given("today is Sunday")
+/*    @Given("today is Sunday")
     public void start_with_125() { value = "125.0"; }
 
     @When("I ask whether it's Friday yet")
@@ -34,5 +34,5 @@ public class StepDefinitionsTest extends com.project.ArmyEye.SpringIntegrationTe
     @Then("I should be told {string}")
     public void i_should_be_told_125(String string) {
         assertEquals(value, b);
-    }
+    }*/
 }
