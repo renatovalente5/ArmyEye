@@ -227,6 +227,7 @@ public class ArmyEyeController {
         log.info("Foi à BD buscar o ECG2!");
         ArrayList<VitalJacket_ECG> aux = (ArrayList<VitalJacket_ECG>) getECGRepository.findAll();
 
+        if(sentECGs >= aux.size()) sentECGs = 1;
         ArrayList<Integer> ret = new ArrayList<>();
         for(int i=0;i<sentECGs; i++) {
             ret.add((int) Double.parseDouble(aux.get(i).ECG));

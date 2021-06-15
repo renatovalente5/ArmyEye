@@ -6,6 +6,9 @@ import com.project.ArmyEye.Models.VitalJacket_ECG;
 import com.project.ArmyEye.repository.ECGRepository;
 import com.project.ArmyEye.repository.GPSRepository;
 import com.project.ArmyEye.repository.HelmetRepository;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +16,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.given;
 
 
 @ExtendWith(SpringExtension.class)
@@ -25,25 +33,35 @@ public class SpringIntegrationTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private GPSRepository gpsRepository;
+    public GPSRepository gpsRepository;
     @Autowired
-    private ECGRepository ecgRepository;
+    public ECGRepository ecgRepository;
     @Autowired
-    private HelmetRepository helmetRepository;
-
+    public HelmetRepository helmetRepository;
 
     @Test
-    void existValueECGinBD() throws Exception {
+    public void givenECG_whenGetArmy_thenConfirmValues()
+            throws Exception {
 
-        List<VitalJacket_ECG> ecg_repo = (List) ecgRepository.findAll();
-        assert((ecg_repo.get(0).getECG()).equals("125.0"));
+        // given
+        VitalJacket_ECG ecg = new VitalJacket_ECG("125.0");
+        // when
+        List<VitalJacket_ECG> repo = (List) ecgRepository.findAll();
+        // then
+        assert((repo.get(0).getECG()).equals(ecg.getECG()));
     }
 
     @Test
-    void existValueGPSinBD() throws Exception {
+    public void givenGPS_whenGetArmy_thenConfirmValues()
+            throws Exception {
 
-        List<GPS> ecg_repo = (List) gpsRepository.findAll();
-        assert((ecg_repo.get(0).getAltitude()).equals("0.0"));
+        // given
+        GPS gps = new GPS();
+        gps.setAltitude("0.0");
+        // when
+        List<GPS> repo = (List) gpsRepository.findAll();
+        // then
+        assert((repo.get(0).getAltitude()).equals(gps.getAltitude()));
     }
 
     @Test
@@ -60,6 +78,7 @@ public class SpringIntegrationTest {
         assert((ecg_repo.get(0).getBattery()).equals("93.0"));
     }
 
+/*
     @Test
     void existValueHelmet3inBD() throws Exception {
 
@@ -80,5 +99,5 @@ public class SpringIntegrationTest {
         List<Helmet> ecg_repo = (List) helmetRepository.findAll();
         assert((ecg_repo.get(0).getHumidity()).equals("44.0"));
     }
-
+*/
 }
