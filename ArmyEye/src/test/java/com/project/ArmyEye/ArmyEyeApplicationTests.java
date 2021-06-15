@@ -112,7 +112,7 @@ class ArmyEyeApplicationTests {
 		assert(l.size()!=0);
 	}
 
-	@Test
+/*	@Test
 	public void getReact() throws Exception {
 		System.out.println("Request React");
 		this.mockMvc.perform(get("http://192.168.160.87:21004/")).andDo(print()).andExpect(status().isOk());
@@ -122,7 +122,7 @@ class ArmyEyeApplicationTests {
 	public void getSpring() throws Exception {
 		System.out.println("Request Spring");
 		this.mockMvc.perform(get("http://192.168.160.87:21001/")).andDo(print()).andExpect(status().isOk());
-	}
+	}*/
 
 	@Test
 	public void getGPS() throws Exception {
