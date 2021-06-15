@@ -89,8 +89,8 @@ class Helmet extends React.Component {
                         <td>CO</td>
                         <td>NO2</td>
                         <td>Temperature</td>
-                        <td>Atmospheric pressure</td>
-{/*                        <td>Humidity</td>
+                        {/*<td>Atmospheric pressure</td>
+                        <td>Humidity</td>
                         <td>Luminosity</td>
                         <td>Battery</td>*/}
 
@@ -106,8 +106,8 @@ class Helmet extends React.Component {
                                 <td style={{ color:'red', fontWeight: 'bold'}}>{hel.CO}</td>
                                 <td>{hel.NO2}</td>
                                 <td>{hel.Environmentaltemperature}</td>
-                                <td>{hel.Atmosphericpressure}</td>
-{/*                                <td>{hel.Humidity}</td>
+                                {/*<td>{hel.Atmosphericpressure}</td>
+                                <td>{hel.Humidity}</td>
                                 <td>{hel.Luminosity}</td>
                                 <td>{hel.Battery}</td>*/}
                             </tr>
@@ -119,8 +119,8 @@ class Helmet extends React.Component {
                                 <td>{hel.CO}</td>
                                 <td>{hel.NO2}</td>
                                 <td>{hel.Environmentaltemperature}</td>
-                                <td>{hel.Atmosphericpressure}</td>
-{/*                                <td>{hel.Humidity}</td>
+                                {/* <td>{hel.Atmosphericpressure}</td>
+                               <td>{hel.Humidity}</td>
                                 <td>{hel.Luminosity}</td>
                                 <td>{hel.Battery}</td>*/}
                             </tr>

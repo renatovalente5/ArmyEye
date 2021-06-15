@@ -34,9 +34,9 @@ class MapComponent extends React.Component {
         this.loadData();
         this.loadMessages();
         this.loadMessagesCO();
-        setInterval(this.loadData, 1000);
-        setInterval(this.loadMessages, 1000);
-        setInterval(this.loadMessagesCO, 1000);
+        setInterval(this.loadData, 10000);
+        setInterval(this.loadMessages, 10000);
+        setInterval(this.loadMessagesCO, 10000);
         this.setState({ mounted: true })
 
     }
@@ -45,6 +45,7 @@ class MapComponent extends React.Component {
         try {
             axios.get("http://192.168.160.87:21001/map").then(response => {
                 this.setState({ army: response.data })
+                console.log( response.data)
             });
         } catch (e) {
             console.log(e);
@@ -85,8 +86,6 @@ class MapComponent extends React.Component {
             <div >
                 <NotificationContainer/>
 
-                {/*<p>{this.state.army.latitude}</p>*/}
-
                 <ReactMapGL {...this.state.viewport}
                             onViewportChange={(viewport) => {
                                 if (mounted) { this.setState({ viewport }) }
@@ -100,6 +99,10 @@ class MapComponent extends React.Component {
                         )
                     )}
                 </ReactMapGL>
+                <p style={{ marginTop: '20px'}} >
+                    Latitude: {this.state.army.map( arm => ( arm.latitude))},
+                    Longitude: {this.state.army.map( arm => ( arm.longitude))}
+                </p>
             </div>
         );
     }
