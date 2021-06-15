@@ -188,14 +188,16 @@ public class ArmyEyeController {
         log.info("Foi à BD buscar o Helmet!");
         ArrayList<Helmet> aux = (ArrayList<Helmet>) getHelmetRepository.findAll();
 
+        if(sentHelmet >= aux.size()) sentHelmet = 1;
         ArrayList<Helmet> ret = new ArrayList<>();
         for(int i=0;i<sentHelmet; i++) {
             ret.add(aux.get(i));
         }
-        if(count%10==0) {
+/*        if(count%10==0) {
             sentHelmet++;
         }
-        count++;
+        count++;*/
+        sentHelmet++;
 
         Collections.reverse(ret);
         System.out.println("arrayHelmet: " + ret.get(0).CO);
