@@ -37,7 +37,7 @@ class Comp2 extends React.Component {
 
     async loadData() {
         try {
-            axios.get("http://192.168.160.87:21001/comp2").then(response => {
+            axios.get("http://localhost:8080/comp2").then(response => {
                 this.setState({ army: response.data })
             });
         } catch (e) {

@@ -30,13 +30,13 @@ class GPS extends React.Component {
 
     componentDidMount(){
       this.loadData();
-      setInterval(this.loadData, 100000);
+      setInterval(this.loadData, 10000);
 
     }
 
     async loadData() {
         try {
-            axios.get("http://192.168.160.87:21001/gps").then(response => {
+            axios.get("http://localhost:8080/gps").then(response => {
                 this.setState({ armys: response.data })
             });
         } catch (e) {

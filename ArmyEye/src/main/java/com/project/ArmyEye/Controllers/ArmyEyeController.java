@@ -48,6 +48,8 @@ public class ArmyEyeController {
 
     private boolean init = true;
     private int count = 0;
+    private int countHelmet = 0;
+    private int countECG = 0;
     private int sentECGs=1;
     private int sentHelmet=1;
     private int sentGPS=1;
@@ -62,44 +64,6 @@ public class ArmyEyeController {
 
     private Map<String, LinkedList<GPS>> trackerArmyGPS = new HashMap<>();
 
-    @GetMapping("/")
-    public void fillLists(){
-
-        log.info("Starting APP");
-        armyGPS = new LinkedList<>();
-        //LinkedList<Comp1> auxList = new LinkedList<>();
-//            List<String[]> gps = tsvr("src/main/java/com/project/ArmyEye/sample_data/GPS.tsv");
-        //System.out.println(getGpsRepository.findAll());
-        Iterable<GPS> gps = getGpsRepository.findAll();
-        for (GPS str : gps) {
-            armyGPS.add(str);
-            //System.out.println(str);
-        }
-
-        System.out.println("--asasas---");
-        armyGPSaux = armyGPS;
-
-//Helmet
-        armyHelmet = new LinkedList<>();
-        List<Helmet> helment = (List) getHelmetRepository.findAll();
-        for (Helmet str : helment) {
-            //gpsRepository.save(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
-            armyHelmet.add(str);
-           // System.out.println(str);
-        }
-
-        armyHelmetaux = armyHelmet;
-
-//ECG
-        armyECG = new LinkedList<>();
-        List<VitalJacket_ECG> ecg = (List) getECGRepository.findAll();
-        for (VitalJacket_ECG str : ecg) {
-            //gpsRepository.save(new GPS(str[0], str[1], str[2], str[3], str[4], str[5]));
-            armyECG.add(str);
-        }
-
-        armyECGaux = armyECG;
-    }
 
     @GetMapping("/map")
     @Scheduled(fixedRate = 10000)
@@ -107,7 +71,7 @@ public class ArmyEyeController {
 
         LinkedList<GPS> passo = new LinkedList<GPS>();
         passo.add(passos);
-        if(sentECGs==1000 || sentGPS==600 || sentHelmet==50){
+        if(sentECGs==1000 || sentGPS==627 || sentHelmet==54){
             //fillLists();
             sentECGs=1;
             sentHelmet=1;
@@ -173,7 +137,6 @@ public class ArmyEyeController {
         Collections.reverse(ret);
         System.out.println("PASSO DADO!");
 
-        System.out.println(ret);
         passos = ret.get(0);
         String response = "Passo ->" + ret.get(0);
         LOG.log(Level.INFO, response);
@@ -188,8 +151,9 @@ public class ArmyEyeController {
         log.info("Foi à BD buscar o Helmet!");
         ArrayList<Helmet> aux = (ArrayList<Helmet>) getHelmetRepository.findAll();
 
-        if(sentHelmet >= aux.size()) sentHelmet = 1;
+        if(sentHelmet >= aux.size()) { sentHelmet = 1; countHelmet++; }
         ArrayList<Helmet> ret = new ArrayList<>();
+        if(countHelmet >= 1){ ret.addAll(aux); }
         for(int i=0;i<sentHelmet; i++) {
             ret.add(aux.get(i));
         }
@@ -229,14 +193,20 @@ public class ArmyEyeController {
         log.info("Foi à BD buscar o ECG2!");
         ArrayList<VitalJacket_ECG> aux = (ArrayList<VitalJacket_ECG>) getECGRepository.findAll();
 
-        if(sentECGs >= aux.size()) sentECGs = 1;
+        if(sentECGs >= aux.size()) { countECG++; }
         ArrayList<Integer> ret = new ArrayList<>();
+        if(countECG >= 1) {
+            for(int i=0;i<sentECGs; i++) {
+                ret.add((int) Double.parseDouble(aux.get(i).ECG));
+            }
+        }
+        if(sentECGs >= aux.size()) { sentECGs = 1; }
         for(int i=0;i<sentECGs; i++) {
             ret.add((int) Double.parseDouble(aux.get(i).ECG));
         }
         sentECGs++;
         Collections.reverse(ret);
-        System.out.println("array2: "+ ret);
+        System.out.println("ECG's: "+ ret);
 
         if(ret.get(0) > 124 ){
             topicProducer.send("ecg", "ECG is too hight! - " + ret.get(0));

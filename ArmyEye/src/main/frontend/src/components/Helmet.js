@@ -46,13 +46,14 @@ class Helmet extends React.Component {
 
     componentDidMount(){
       this.loadData();
-      setInterval(this.loadData, 10000);
+      setInterval(this.loadData, 50000);
 
     }
 
     async loadData() {
         try {
-            axios.get("http:/192.168.160.87:21001/helmet").then(response => {
+            axios.get("http://localhost:8080/helmet").then(response => {
+                console.log("ola Helmet")
                 this.setState({ helmet: response.data })
             });
         } catch (e) {
@@ -87,11 +88,11 @@ class Helmet extends React.Component {
                         <td>Altitude</td>
                         <td>CO</td>
                         <td>NO2</td>
-                        <td>Environmentaltemperature</td>
-                        <td>Atmosphericpressure</td>
-                        <td>Humidity</td>
+                        <td>Temperature</td>
+                        <td>Atmospheric pressure</td>
+{/*                        <td>Humidity</td>
                         <td>Luminosity</td>
-                        <td>Battery</td>
+                        <td>Battery</td>*/}
 
                     </tr>
                     </thead>
@@ -106,9 +107,9 @@ class Helmet extends React.Component {
                                 <td>{hel.NO2}</td>
                                 <td>{hel.Environmentaltemperature}</td>
                                 <td>{hel.Atmosphericpressure}</td>
-                                <td>{hel.Humidity}</td>
+{/*                                <td>{hel.Humidity}</td>
                                 <td>{hel.Luminosity}</td>
-                                <td>{hel.Battery}</td>
+                                <td>{hel.Battery}</td>*/}
                             </tr>
                         } else{
                             return  <tr key = {hel.Timestampms}>
@@ -119,9 +120,9 @@ class Helmet extends React.Component {
                                 <td>{hel.NO2}</td>
                                 <td>{hel.Environmentaltemperature}</td>
                                 <td>{hel.Atmosphericpressure}</td>
-                                <td>{hel.Humidity}</td>
+{/*                                <td>{hel.Humidity}</td>
                                 <td>{hel.Luminosity}</td>
-                                <td>{hel.Battery}</td>
+                                <td>{hel.Battery}</td>*/}
                             </tr>
                         }
                     }

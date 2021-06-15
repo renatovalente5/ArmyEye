@@ -45,7 +45,7 @@ class App extends React.Component{
                 <li><Link to={'/gps'} className="nav-link"><b>GPS</b></Link></li>
                 <li><Link to={'/helmet'} className="nav-link"><b>Helmet</b></Link></li>
                 <li><Link to={'/ecg'} className="nav-link"><b>ECG</b></Link></li>
-                <li><Link to={'/comp2'} className="nav-link"><b>Comp2</b></Link></li>
+                {/*<li><Link to={'/comp2'} className="nav-link"><b>Comp2</b></Link></li>*/}
               </ul>
             </nav>
             <hr/>
@@ -54,8 +54,8 @@ class App extends React.Component{
               <Route path='/gps' component={GPS}/>
               <Route path='/helmet' component={Helmet}/>
               <Route path='/ecg' component={ECG}/>
-              <Route path='/comp2' component={Comp2}/>
               <Route path='/' component={Initial}/>
+              {/*<Route path='/comp2' component={Comp2}/>*/}
             </Switch>
           </div>
         </Router>
