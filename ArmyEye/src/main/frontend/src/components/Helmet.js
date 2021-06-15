@@ -46,7 +46,7 @@ class Helmet extends React.Component {
 
     componentDidMount(){
       this.loadData();
-      setInterval(this.loadData, 50000);
+      setInterval(this.loadData, 20000);
 
     }
 
