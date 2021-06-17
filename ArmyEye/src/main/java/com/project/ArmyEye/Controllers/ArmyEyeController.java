@@ -151,19 +151,19 @@ public class ArmyEyeController {
         log.info("Foi à BD buscar o Helmet!");
         ArrayList<Helmet> aux = (ArrayList<Helmet>) getHelmetRepository.findAll();
 
-        if(sentHelmet >= aux.size()) { sentHelmet = 1; countHelmet++; }
+        if(sentHelmet >= aux.size()) { sentHelmet = 1; }
         ArrayList<Helmet> ret = new ArrayList<>();
 
         for(int i=0;i<sentHelmet; i++) {
             ret.add(aux.get(i));
         }
-        if(countHelmet >= 1){ ret.addAll(aux); }
+        sentHelmet++;
+
 /*        if(count%10==0) {
             sentHelmet++;
         }
         count++;*/
-        sentHelmet++;
-
+        
         Collections.reverse(ret);
         System.out.println("arrayHelmet: " + ret.get(0).CO);
         if((int) Double.parseDouble(ret.get(0).CO) > 0 ){
@@ -194,19 +194,13 @@ public class ArmyEyeController {
         log.info("Foi à BD buscar o ECG2!");
         ArrayList<VitalJacket_ECG> aux = (ArrayList<VitalJacket_ECG>) getECGRepository.findAll();
 
-        if(sentECGs >= aux.size()) { countECG++; }
+        if(sentECGs >= aux.size()) { sentECGs = 1; }
         ArrayList<Integer> ret = new ArrayList<>();
 
+        sentECGs++;
         for(int i=0;i<sentECGs; i++) {
             ret.add((int) Double.parseDouble(aux.get(i).ECG));
         }
-        if(countECG >= 1) {
-            for(int i=0;i<aux.size(); i++) {
-                ret.add((int) Double.parseDouble(aux.get(i).ECG));
-            }
-        }
-        sentECGs++;
-        if(sentECGs >= aux.size()) { sentECGs = 1; }
 
         Collections.reverse(ret);
         System.out.println("ECG's: "+ ret);
