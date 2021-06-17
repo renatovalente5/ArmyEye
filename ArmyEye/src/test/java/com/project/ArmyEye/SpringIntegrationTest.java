@@ -6,9 +6,6 @@ import com.project.ArmyEye.Models.VitalJacket_ECG;
 import com.project.ArmyEye.repository.ECGRepository;
 import com.project.ArmyEye.repository.GPSRepository;
 import com.project.ArmyEye.repository.HelmetRepository;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.BDDMockito.given;
-
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -45,8 +36,10 @@ public class SpringIntegrationTest {
 
         // given
         VitalJacket_ECG ecg = new VitalJacket_ECG("125.0");
+
         // when
         List<VitalJacket_ECG> repo = (List) ecgRepository.findAll();
+
         // then
         assert((repo.get(0).getECG()).equals(ecg.getECG()));
     }
@@ -58,46 +51,83 @@ public class SpringIntegrationTest {
         // given
         GPS gps = new GPS();
         gps.setAltitude("0.0");
+
         // when
         List<GPS> repo = (List) gpsRepository.findAll();
+
         // then
         assert((repo.get(0).getAltitude()).equals(gps.getAltitude()));
     }
 
     @Test
-    void existValueHelmetinBD() throws Exception {
+    void givenHelmet_whenGetArmy_thenConfirmValues() throws Exception {
 
-        List<Helmet> ecg_repo = (List) helmetRepository.findAll();
-        assert((ecg_repo.get(0).getCO()).equals("0.0"));
+        // given
+        Helmet helmet = new Helmet();
+        helmet.setCO("0.0");
+
+        // when
+        List<Helmet> repo = (List) gpsRepository.findAll();
+
+        // then
+        assert((repo.get(0).getCO()).equals(helmet.getCO()));
     }
 
     @Test
-    void existValueHelmet2inBD() throws Exception {
+    void givenHelmet_whenGetArmy_thenConfirmBattery() throws Exception {
 
-        List<Helmet> ecg_repo = (List) helmetRepository.findAll();
-        assert((ecg_repo.get(0).getBattery()).equals("93.0"));
+        // given
+        Helmet helmet = new Helmet();
+        helmet.setBattery("93.0");
+
+        // when
+        List<Helmet> repo = (List) gpsRepository.findAll();
+
+        // then
+        assert((repo.get(0).getBattery()).equals(helmet.getBattery()));
     }
 
-/*
-    @Test
-    void existValueHelmet3inBD() throws Exception {
 
-        List<Helmet> ecg_repo = (List) helmetRepository.findAll();
-        assert((ecg_repo.get(0).getNO2()).equals("-1.0"));
+    @Test
+    void givenHelmet_whenGetArmy_thenConfirmNO() throws Exception {
+
+        // given
+        Helmet helmet = new Helmet();
+        helmet.setNO2("-1.0");
+
+        // when
+        List<Helmet> repo = (List) gpsRepository.findAll();
+
+        // then
+        assert((repo.get(0).getNO2()).equals(helmet.getNO2()));
     }
 
     @Test
     void existValueHelmet4inBD() throws Exception {
 
-        List<Helmet> ecg_repo = (List) helmetRepository.findAll();
-        assert((ecg_repo.get(0).getLuminosity()).equals("100.0"));
+        // given
+        Helmet helmet = new Helmet();
+        helmet.setLuminosity("100.0");
+
+        // when
+        List<Helmet> repo = (List) gpsRepository.findAll();
+
+        // then
+        assert((repo.get(0).getLuminosity()).equals(helmet.getLuminosity()));
     }
 
     @Test
     void existValueHelmet5inBD() throws Exception {
 
-        List<Helmet> ecg_repo = (List) helmetRepository.findAll();
-        assert((ecg_repo.get(0).getHumidity()).equals("44.0"));
+        // given
+        Helmet helmet = new Helmet();
+        helmet.setHumidity("44.0");
+
+        // when
+        List<Helmet> repo = (List) gpsRepository.findAll();
+
+        // then
+        assert((repo.get(0).getHumidity()).equals(helmet.getHumidity()));
     }
-*/
+
 }
