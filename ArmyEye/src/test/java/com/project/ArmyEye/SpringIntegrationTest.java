@@ -67,7 +67,7 @@ public class SpringIntegrationTest {
         helmet.setCO("0.0");
 
         // when
-        List<Helmet> repo = (List) gpsRepository.findAll();
+        List<Helmet> repo = (List) helmetRepository.findAll();
 
         // then
         assert((repo.get(0).getCO()).equals(helmet.getCO()));
@@ -81,7 +81,7 @@ public class SpringIntegrationTest {
         helmet.setBattery("93.0");
 
         // when
-        List<Helmet> repo = (List) gpsRepository.findAll();
+        List<Helmet> repo = (List) helmetRepository.findAll();
 
         // then
         assert((repo.get(0).getBattery()).equals(helmet.getBattery()));
@@ -96,35 +96,35 @@ public class SpringIntegrationTest {
         helmet.setNO2("-1.0");
 
         // when
-        List<Helmet> repo = (List) gpsRepository.findAll();
+        List<Helmet> repo = (List) helmetRepository.findAll();
 
         // then
         assert((repo.get(0).getNO2()).equals(helmet.getNO2()));
     }
 
     @Test
-    void existValueHelmet4inBD() throws Exception {
+    void givenHelmet_whenGetArmy_thenConfirmLuminosity() throws Exception {
 
         // given
         Helmet helmet = new Helmet();
         helmet.setLuminosity("100.0");
 
         // when
-        List<Helmet> repo = (List) gpsRepository.findAll();
+        List<Helmet> repo = (List) helmetRepository.findAll();
 
         // then
         assert((repo.get(0).getLuminosity()).equals(helmet.getLuminosity()));
     }
 
     @Test
-    void existValueHelmet5inBD() throws Exception {
+    void givenHelmet_whenGetArmy_thenConfirmHumidity() throws Exception {
 
         // given
         Helmet helmet = new Helmet();
         helmet.setHumidity("44.0");
 
         // when
-        List<Helmet> repo = (List) gpsRepository.findAll();
+        List<Helmet> repo = (List) helmetRepository.findAll();
 
         // then
         assert((repo.get(0).getHumidity()).equals(helmet.getHumidity()));
