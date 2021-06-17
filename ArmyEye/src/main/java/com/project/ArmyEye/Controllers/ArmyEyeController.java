@@ -163,7 +163,7 @@ public class ArmyEyeController {
             sentHelmet++;
         }
         count++;*/
-        
+
         Collections.reverse(ret);
         System.out.println("arrayHelmet: " + ret.get(0).CO);
         if((int) Double.parseDouble(ret.get(0).CO) > 0 ){

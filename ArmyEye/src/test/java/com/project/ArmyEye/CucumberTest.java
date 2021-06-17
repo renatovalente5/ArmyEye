@@ -15,8 +15,6 @@ import static org.junit.Assert.*;
 @RunWith(Cucumber.class)
 public class CucumberTest extends com.project.ArmyEye.SpringIntegrationTest {
 
-    //Temos aquele problema que falamos com o professor de não conseguirmos correr os testes do Cucumber e os putros juntos
-
     private boolean out_of_limits = false;
     private GPS gps_solder;
 
