@@ -176,7 +176,8 @@ public class ArmyEyeController {
     @Scheduled(fixedRate = 100000)
     public ArrayList<VitalJacket_ECG> getECG(){
         log.info("Foi à BD buscar o ECG!");
-        ArrayList<VitalJacket_ECG> aux = (ArrayList<VitalJacket_ECG>) getECGRepository.findAll();
+        ArrayList<VitalJacket_ECG> aux = null;
+        aux = (ArrayList<VitalJacket_ECG>) getECGRepository.findAll();
 
         ArrayList<VitalJacket_ECG> ret = new ArrayList<>();
         for(int i=0;i<sentECGs; i++) {
@@ -211,7 +212,6 @@ public class ArmyEyeController {
 
         return ret;
     }
-
 
 
     @GetMapping("/comp2")
