@@ -27,7 +27,7 @@ import java.util.List;
 @AutoConfigureMockMvc
 class ArmyEyeApplicationTests {
 
-	@Autowired
+/*	@Autowired
 	private MockMvc mockMvc;
 
 	@Autowired
@@ -39,7 +39,7 @@ class ArmyEyeApplicationTests {
 
 	@Test
 	void contextLoads() {
-	}
+	}*/
 
 //	@Test
 //	void checkGPSTest(){
