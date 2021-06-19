@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 @RunWith(Cucumber.class)
 public class CucumberTest extends com.project.ArmyEye.SpringIntegrationTest {
 
-    private boolean out_of_limits = false;
+    /*private boolean out_of_limits = false;
     private GPS gps_solder;
 
     @Given("the soldier localization are being represented")
@@ -70,6 +70,6 @@ public class CucumberTest extends com.project.ArmyEye.SpringIntegrationTest {
     @Then("it triggers a general alert of prohibition to enter the danger zone")
     public void it_triggers_a_general_alert_of_prohibition_to_enter_the_danger_zone(boolean expectedAnswer) {
         assertEquals(expectedAnswer, out_of_value_helmet);
-    }
+    }*/
 
 }

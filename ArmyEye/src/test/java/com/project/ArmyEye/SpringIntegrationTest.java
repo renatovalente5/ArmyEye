@@ -20,7 +20,7 @@ import java.util.List;
 @AutoConfigureMockMvc
 public class SpringIntegrationTest {
 
-    @Autowired
+    /*@Autowired
     private MockMvc mockMvc;
 
     @Autowired
@@ -128,6 +128,6 @@ public class SpringIntegrationTest {
 
         // then
         assert((repo.get(0).getHumidity()).equals(helmet.getHumidity()));
-    }
+    }*/
 
 }
