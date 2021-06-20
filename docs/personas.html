@@ -21,6 +21,7 @@
 		
 		<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'> -->
 		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet"/>
 
 		<!-- CSS
 		================================================== -->
@@ -88,6 +89,7 @@
 						<div class="vertical"></div>
 						<li><a href="index.html">Home</a></li>
 						<li><a href="personas.html" class='active-page'>Personas / Scenarios</a></li>
+						<li><a href="Documentation.html">Documentation</a></li>
 						<!-- <li><a href="progress.html">Progress</a></li> -->
 					</ul>
                 </nav>
@@ -144,124 +146,7 @@
 		==================================== -->
 
 		
-		<!--
-        Motivation
-        ==================================== -->
-		
-		<section id="personas" class="features">
-			<div class="container">
-				<div class="row">
-					<div class="sec-title text-center">
-						<div class="devider"></div><br>
-						<h2>Descrição da Aplicação </h2>
-						<br>
-					</div>		
-					<div class="row align-items-center justify-content-center">
-						<p>A Aplicação tem como objetivo monitorizar a atividade dos soldados que se encontram na área do mapa.
-						Os dados de monitorização são captados pelo GPS do soldado, pelo capacete do soldado e pelo seu dispositivo de batimentos cardiacos.</p>
-						<p>Na página do Map podemos ver o soldado a movimentar-se no terreno,na página GPS é apresentado os dados captados pelo dispositivo GPS do 
-						soldado, na página Helmet podemos ver os dados recolhidos pelo capacete, e na página do ECG teremos a atividade cardiaca do nosso soldado.</p>
-						<p>À medida que os dados do soldado são recebidos, se for observada atividade fora do normal, como a pulsação ou níveis elevados de Monóxido de 
-						Carbono nos pulmões, são enviadas mensagens de alerta e perigo para a página do Map, para quem tiver a monitorizar o percurso do soldado 
-						conseguir enviar reforços para socorrer o soldado a tempo.</p>
-					</div>
-					<div class="sec-title text-center">
-					</div>
-				</div>
-			</div>
-			<div class="container">
-				<div class="row">
-					<div class="sec-title text-center">
-						<div class="sec-title text-center">
-							<div class="devider"></div>
-						</div>
-						<!-- <h2>Scenarios</h2> -->
-						<br>
-					</div>		
-					<div class="row align-items-center justify-content-center">
-						<table>
-							<!-- <caption>Ações de Socorro </caption> -->
-							<tr>
-								<th style="width: 200px;">
-									Features
-								<th>
-								<th style=" font-size: 13px;">
-									<p>mapa com o soldado a movimentar-se em tempo real</p>
-									<p>tabela com os dados do gps</p>
-									<p>dados do capacete sobre o soldado que dá uma mensagem caso os niveis de monoxio de carbono esta demasiado elevado</p>
-									<p>grafico e tabela informativa sobre o ECG do soldado</p>
-								</th>
-							</tr>
-							<tr>
-								<th style="width: 200px;">
-									Data models
-								<th>
-								<th style=" font-size: 13px;">
-									<p> GPS.tsv -> </p>
-									<p> Helmet.tsv -> </p> 
-									<p> VitalJacket_ECG.tsv -> </p>
-								</th>
-							</tr>
-							<tr>
-								<th style="width: 200px;">
-									IP's & Ports
-								<th>
-								<th style=" font-size: 13px;">
-									<p><a href="http://192.168.160.87:21004" style="color: green;">React</a> -> 192.168.160.87:21004</p>
-									<p><a href="http://192.168.160.20:9090" style="color: green;">Jenkins</a> -> 192.168.160.20:9090</p> 
-									<p><a href="http://192.168.160.18:5601" style="color: green;">Elastic</a> -> 192.168.160.18:5601</p>
-								</th>
-							</tr>
-							<tr>
-								<th style="width: 200px;">
-									Kafka Topicos
-								<th>
-								<th style=" font-size: 13px;">
-									<p>ECG - batimentos cardiacos, passa 125 da alert </p>
-									<p>CO - monoxido de carbono, maior que 0 da alert </p>
-								</th>
-							</tr>
-							<tr>
-								<th style="width: 200px;">
-									Repository organization
-								<th>
-								<th style=" font-size: 13px;">
-									<p> </p>
-									<p></p>
-								</th>
-							</tr>
-							<tr>
-								<th style="width: 200px;">
-									Jenkings Pipeline
-								<th>
-								<th style=" font-size: 13px;">
-									<p> </p>
-									<p></p>
-								</th>
-							</tr>
-							<tr>
-								<th style="width: 200px;">
-									Tests
-								<th>
-								<th style=" font-size: 13px;">
-									<p>Unit Tests ->  mvn tests para testar</p>
-									<p>Integration Tests -> têm quer ser testados separadamente</p>
-									<p>Cucumber Tests  ->  mvn tests para testa</p>
-								</th>
-							</tr>
-							<tr>
-								<th style="width: 200px;">
-									Final considerations
-								<th>
-								<th style=" font-size: 13px;">
-									<p>(dificuldades & what you would have changed)</p>
-								</th>
-							</tr>
-						</table>
-					</div>
-				</div><br><br>
-			</div>
-		</section>
+	
 		
         <!--
         End Motivation
@@ -390,7 +275,7 @@
 						<div class="sec-title text-center">
 							<div class="devider"></div>
 						</div>
-						<h2>Scenarios</h2>
+						<h2>Cenários</h2>
 						<br>
 					</div>		
 					<div class="row align-items-center justify-content-center">
