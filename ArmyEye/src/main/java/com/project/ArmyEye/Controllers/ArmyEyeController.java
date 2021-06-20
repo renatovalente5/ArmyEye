@@ -167,7 +167,7 @@ public class ArmyEyeController {
         Collections.reverse(ret);
         System.out.println("arrayHelmet: " + ret.get(0).CO);
         if((int) Double.parseDouble(ret.get(0).CO) > 0 ){
-            topicProducer.send("co", "CO is too hight! - " + ret.get(0).CO);
+            topicProducer.send("co", "CO is too high! - " + ret.get(0).CO);
         }
         return ret;
     }
@@ -176,12 +176,11 @@ public class ArmyEyeController {
     @Scheduled(fixedRate = 100000)
     public ArrayList<VitalJacket_ECG> getECG(){
         log.info("Foi à BD buscar o ECG!");
-        ArrayList<VitalJacket_ECG> aux = null;
-        aux = (ArrayList<VitalJacket_ECG>) getECGRepository.findAll();
+        ArrayList<VitalJacket_ECG> aux2 = (ArrayList<VitalJacket_ECG>) getECGRepository.findAll();
 
         ArrayList<VitalJacket_ECG> ret = new ArrayList<>();
         for(int i=0;i<sentECGs; i++) {
-            ret.add(aux.get(i));
+            ret.add(aux2.get(i));
         }
         Collections.reverse(ret);
 
@@ -207,7 +206,7 @@ public class ArmyEyeController {
         System.out.println("ECG's: "+ ret);
 
         if(ret.get(0) > 124 ){
-            topicProducer.send("ecg", "ECG is too hight! - " + ret.get(0));
+            topicProducer.send("ecg", "ECG is too high! - " + ret.get(0));
         }
 
         return ret;

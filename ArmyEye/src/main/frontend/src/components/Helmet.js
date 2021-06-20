@@ -78,7 +78,7 @@ class Helmet extends React.Component {
                         }
                     }}
                 />*/}
-                <H0 className="text-center" > Army Status </H0>
+                <H0 className="text-center" > Soldier Helmet Status </H0>
 
                 <table className = "table table-striped">
                     <thead>
@@ -116,7 +116,7 @@ class Helmet extends React.Component {
                                 <td>{hel.TimestampUTC}</td>
                                 <td>{hel.Timestampms}</td>
                                 <td>{hel.Altitude}</td>
-                                <td>{hel.CO}</td>
+                                <td style={{ color:'blue', fontWeight: 'bold'}}>{hel.CO}</td>
                                 <td>{hel.NO2}</td>
                                 <td>{hel.Environmentaltemperature}</td>
                                 {/* <td>{hel.Atmosphericpressure}</td>
@@ -126,8 +126,7 @@ class Helmet extends React.Component {
                             </tr>
                         }
                     }
-                    )
-                    }
+                    )}
                     </tbody>
                 </table>
             </div>

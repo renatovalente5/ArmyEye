@@ -47,7 +47,7 @@ class GPS extends React.Component {
     render(){
         return(
             <div>
-                <H0 className="text-center" > Army Steps </H0>
+                <H0 className="text-center" > Soldier Steps </H0>
 
                 <table className = "table table-striped">
                     <thead>

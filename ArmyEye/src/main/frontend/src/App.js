@@ -36,8 +36,8 @@ class App extends React.Component{
     return (
         <Router>
           <div>
-            <H0><i>ArmyEyer</i></H0>
-            <H1> The Army is coming...</H1>
+            <H0><i>ArmyEye</i></H0>
+            <H1>We save lives!</H1>
 
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
               <ul className="navbar-nav mr-auto">

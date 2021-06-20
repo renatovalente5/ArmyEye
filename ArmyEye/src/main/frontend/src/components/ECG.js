@@ -66,7 +66,6 @@ class ECG extends React.Component {
     async loadData2() {
         try {
             axios.get("http://192.168.160.87:21001/ecg2").then(response => {
-                console.log(response.data);
                 this.setState({ datasets: [
                         {
                             label: 'ECG',
@@ -86,9 +85,10 @@ class ECG extends React.Component {
 
 
     render(){
+        let i = 0;
         return(
             <div>
-                <H0 className="text-center" > Health Army Status </H0>
+                <H0 className="text-center" > Soldier Health Status </H0>
                 <Line data={this.state} />
 
                 <table className = "table table-striped">
@@ -98,12 +98,15 @@ class ECG extends React.Component {
 
                     </tr>
                     </thead>
+
                     <tbody id="myTable"> { this.state.ECG.map( ecg =>
                     {
+                        i++;
                         if(ecg.ECG > 124.0){
-                            return <tr style={{ color:'red', fontWeight: 'bold'}} key = {ecg.ECG}><td>{ecg.ECG}</td></tr>
+                            return <tr style={{ color:'red', fontWeight: 'bold'}} key = {i} ><td>{ecg.ECG}</td></tr>
+
                         } else{
-                            return <tr style={{ color:'blue', fontWeight: 'bold'}} key = {ecg.ECG}><td>{ecg.ECG}</td></tr>
+                            return <tr style={{ color:'blue', fontWeight: 'bold'}} key = {i} ><td>{ecg.ECG}</td></tr>
                         }
                     }
                     )}
