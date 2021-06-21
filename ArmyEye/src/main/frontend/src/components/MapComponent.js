@@ -112,14 +112,6 @@ class MapComponent extends React.Component {
         }
     }
 
-
-    delta = (arm) => {
-        console.log("Entrou no Delta")
-        this.setState({
-            SelectedPark: true
-        });
-    }
-
     delta2 = () => {
         console.log("saiu no Delta")
         this.setState({
@@ -161,7 +153,8 @@ class MapComponent extends React.Component {
 
                                     <Popup
                                         latitude={Number(arm.latitude)}
-                                        longitude={Number(arm.longitude)}>
+                                        longitude={Number(arm.longitude)}
+                                        onClose={this.delta3}>
                                         <div className="marker">
                                             <span>
                                                 <p><b>Latitude:</b> {this.state.army.map( arm => ( arm.latitude))}</p>
