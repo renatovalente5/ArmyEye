@@ -39,7 +39,7 @@ pipeline {
             steps {
                 dir("ArmyEye"){
                     echo "Deploying Artifact .."
-                    // sh "mvn deploy -f pom.xml -s settings.xml"
+                    sh "mvn deploy -f pom.xml -s settings.xml"
                 }
             }
         }
