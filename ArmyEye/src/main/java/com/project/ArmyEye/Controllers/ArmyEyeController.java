@@ -54,6 +54,9 @@ public class ArmyEyeController {
     private int sentHelmet=1;
     private int sentGPS=1;
     private GPS passos = new GPS();
+    private String saveLastECG = "0";
+    private String saveLastCO = "0";
+
     private static LinkedList<GPS> armyGPS;
     private static LinkedList<Helmet> armyHelmet;
     private static LinkedList<VitalJacket_ECG> armyECG;
@@ -169,6 +172,7 @@ public class ArmyEyeController {
         if((int) Double.parseDouble(ret.get(0).CO) > 0 ){
             topicProducer.send("co", "CO is too high! - " + ret.get(0).CO);
         }
+        saveLastCO = ret.get(0).CO;
         return ret;
     }
 
@@ -209,6 +213,7 @@ public class ArmyEyeController {
             topicProducer.send("ecg", "ECG is too high! - " + ret.get(0));
         }
 
+        saveLastECG = ret.get(0) + "";
         return ret;
     }
 
@@ -227,6 +232,16 @@ public class ArmyEyeController {
     @GetMapping("/msgCO")
     public String getMsgCO(){
         return topicListener.getMessageCO();
+    }
+
+    @GetMapping("/valorECG")
+    @Scheduled(fixedRate = 100000)
+    public String getValorECG(){ return saveLastECG; }
+
+    @GetMapping("/valorCO")
+    @Scheduled(fixedRate = 100000)
+    public String getValorCO(){
+        return saveLastCO;
     }
 
 }
