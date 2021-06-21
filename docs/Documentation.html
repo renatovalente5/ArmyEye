@@ -450,13 +450,13 @@
 							</tr>
 							<tr>
 								<th style="width: 200px;">
-									Field					
+									Tópicos					
 								</th>
 								<th style="width: 200px;">
-									Condition					
+									Condição					
 								</th>
 								<th style="width: 200px;">
-									Message	(Example)				
+									Mensagem (Exemplo)				
 								</th>
 							</tr>
 							<tr>
@@ -510,6 +510,24 @@
                         <h4>Repositório e outros detalhes</h4>
                         <br>
                         <p><a href="https://github.com/o2valente/es-2020-2021-P21" target="_blank" style="color: green;">Visite o Repositório aqui</a></p>
+                        <br>
+                        <p>O Repositório começa por estar dividido em duas pastas: <i>ArmyEye</i> e <i>docs</i>. Na primeira está a aplicação e na segunda o código para o website que contém a documentação.</p>
+                        <p>Também na pasta inicial do repositório podemos encontrar o ficheiro Jenkinsfile.</p>
+                        <p>Dentro da pasta ArmyEye é possível encontrar os seguintes ficheiros de maior importância: </p>
+                        <ul>
+                            <li>&nbsp&nbsp&nbsp ➤ dockerfile</li>
+                            <li>&nbsp&nbsp&nbsp ➤ pom.xml</li>
+                            <li>&nbsp&nbsp&nbsp ➤ logstash.conf</li>
+                        </ul>
+                        <p>Na pasta <i>sample_data</i> é possível encontrar os ficheiros .tsv de onde provêm os dados da aplicação, sendo estes posteriormente tornados dinâmicos.</p>
+                        <p>Navegando para a pasta <i>src</i> é possível encontrar a pasta <i>test</i> onde se podem encontrar os testes feitos ̀a aplicação, todos estes testes são corridos automaticamente com o auxílio de Jenkins.
+                        Na pasta <i>main</i> está o código fonte do projeto, dividido nas seguintes pastas:</p>
+                        <ul>
+                            <li>&nbsp&nbsp&nbsp ➤ frontend - Pasta com o código da aplicação em <i>React</i></li>
+                            <li>&nbsp&nbsp&nbsp ➤ java/com/project/ArmyEye - Pasta com o código da aplicação <i>SpringBoot</i></li>
+                            <li>&nbsp&nbsp&nbsp ➤ resources - Pasta com o ficheiro <i>application.properties</i> e <i>log4j2.xml</i></li>
+                        </ul>
+
                     </div>	
 				</div>
 			</div>
@@ -535,7 +553,9 @@
                     <br><br>
                     <div>
                         <h4>Testes</h4>
-                       
+                        <br>
+                        <P>Foram criados testes unitários, de integração e Cucumber. Para correr estes testes deve ser utilizado o comando <b>mvn test</b>. 
+                            Com exceção dos testes Cucumber que têm que ser corridos individulamente.</p>
                     </div>	
 				</div>
 			</div>
@@ -551,12 +571,17 @@
 					</div>	
                     <div>
                         <h4>Dificuldades</h4>
-
+                        <br>
+                        <p>Os testes Cucumber revelaram-se uma grande dificuldade, não pelo conceito ou implementação do código dos mesmos, mas pela sua integração com os testes
+                            feitos posteriormente. Tendo esta integração não ter sido possível.
+                        </p>
+                        <p>Sendo a maior parte das tecnologias desconhecidas para os membros do grupo, foi preciso trabalho extra de forma a poder implementar as milestones com sucesso.</p>
                     </div>	
                     <br><br>
                     <div>
-                        <h4>O que mudariamos</h4>
-                        
+                        <h4>O que mudaríamos?</h4>
+                        <br>
+                        <p>Os dados fornecidos não eram os melhores, talvez por serem ficheiros ao invés de dados in real time provenientes de uma API, o que consequentemente leva a que o tema em si fique um pouco menos interessante.</p>
                     </div>	
                     <br><br>	
 				</div>
