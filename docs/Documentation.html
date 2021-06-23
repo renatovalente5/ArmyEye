@@ -543,7 +543,11 @@
 					</div>	
                     <div>
                         <h4>Deploy - Jenkins Pipeline</h4>
-
+						<br>
+						<p>Para a definição do pipeline Jenkins, inicia-se guardando os dados da VM onde será feito o deploy de algumas componentes da aplicação.
+							O primeiro stage é a clonagem do repositório Github, de forma a obter a última versão do código desenvolvido. Após esta etapa, é realizada uma compilação através de Maven (mvn clean install) deste mesmo código, seguidos dos testes (unitários e de integração) desenvolvidos, através também de comandos Maven (mvn test).
+							Depois de verificar a estabilidade do código do projeto, faz-se o deploy do JAR gerado para a VM de Artifactory, de forma a guardar todas as versões de desenvolvimento do projeto. Seguidamente, dá-se lugar ao build da aplicação Spring e da tecnologia React associada para imagens docker que, por sua vez, serão atualizadas no Docker Registry fornecido.
+							Finalmente, é realizado o deploy das componentes do projeto que possam mudar entre builds: é estabelecida uma conexão com a Virtual Machine de Playground, através das credenciais específicas para o nosso grupo, e atualiza-se a mesma com novos containers, correndo novas imagens docker das componentes do nosso projeto. Este processo consiste na paragem e remoção dos containers antigos, a obtenção das novas imagens do docker registry, e a criação e início dos containers com a última versão do projeto.</p>
                     </div>	
                     <br><br>
                     <div>
