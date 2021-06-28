@@ -502,8 +502,17 @@
                         <h4>Runtimes, name servers e portos usados</h4>
                         <br>
                         <p><a href="http://192.168.160.87:21004" style="color: green;">React</a> -> 192.168.160.87:21004</p>
+                        <p><a href="http://192.168.160.87:21001" style="color: green;">SpringBoot</a> -> 192.168.160.87:21001</p>
+						<p>----------</p>
+                        <p><a href="http://192.168.160.49:8082" style="color: green;">Artifactory</a> -> 192.168.160.49:8082</p> 
                         <p><a href="http://192.168.160.20:9090" style="color: green;">Jenkins</a> -> 192.168.160.20:9090</p> 
+                        <p><a href="http://192.168.160.48:5000" style="color: green;">Docker Registry</a> -> 192.168.160.48:5000</p> 
+						<p>----------</p>
                         <p><a href="http://192.168.160.18:5601" style="color: green;">Elastic</a> -> 192.168.160.18:5601</p>
+                        <p>Logstash -> 192.168.160.87:21005</p>
+						<p>----------</p>
+                        <p>Postgres Database -> 192.168.160.87:21002</p>
+
                     </div>	
                     <br><br>
                     <div>
@@ -552,14 +561,22 @@
                     <br><br>
                     <div>
                         <h4>Monitorização</h4>
-                        
+                        <br>
+						<p>No que toca a Monitoring, uma das VMs disponibilizadas possui um container ativo de logstash programado para comunicar com o Elastic Search 
+							pré-configurado na RuntimeVM. Esta programação consiste no envio de logs para um host específico, sob o índice "esp21", em formato json.
+							Na componente SpringBoot do projeto encontra-se também um ficheiro, log4j2.xml, que faz a conexão com o container logstash de forma a que este
+							receba a informação dos logs efetuados ao longo da execução do projeto.
+							Assim, aquando da utilização normal do ArmyEye, os logs são imediatamente registados no Elastic Search e possíveis de analisar através do Kibana,
+							tal como outras estatísticas que este disponibilize.
+						</p>
+                   
                     </div>	
                     <br><br>
                     <div>
                         <h4>Testes</h4>
                         <br>
-                        <P>Foram criados testes unitários, de integração e Cucumber. Para correr estes testes deve ser utilizado o comando <b>mvn test</b>. 
-                            Com exceção dos testes Cucumber que têm que ser corridos individulamente.</p>
+                        <P>Foram criados testes unitários, de integração e Cucumber. Para correr estes testes deve ser utilizado o comando <b>mvn test</b>,
+                            com exceção dos testes Cucumber que têm que ser corridos individulamente.</p>
                     </div>	
 				</div>
 			</div>
@@ -585,106 +602,14 @@
                     <div>
                         <h4>O que mudaríamos?</h4>
                         <br>
-                        <p>Os dados fornecidos não eram os melhores, talvez por serem ficheiros ao invés de dados in real time provenientes de uma API, o que consequentemente leva a que o tema em si fique um pouco menos interessante.</p>
+                        <p>Os dados fornecidos não eram tão ricos em informação como seria desejável, talvez por serem ficheiros ao invés de dados in real time provenientes de uma API, o que consequentemente leva a uma quantidade insuficiente de dados para
+							cumprir algumas features ambicionadas. Também o uso de um template seria benéfico de forma a tornar o projeto mais apelativo e de uso mais intuitivo.</p>
                     </div>	
                     <br><br>	
 				</div>
 			</div>
 		</section>
-		<section>
-			<div class="container">
-				<div class="row">
-					<div class="sec-title text-center">
-						<div class="sec-title text-center">
-							<div class="devider"></div>
-						</div>
-						<!-- <h2>Scenarios</h2> -->
-						<br>
-					</div>		
-					<div class="row align-items-center justify-content-center">
-						<table>
-							<!-- <caption>Ações de Socorro </caption> -->
-							<tr>
-								<th style="width: 200px;">
-									Features
-								<th>
-								<th style=" font-size: 13px;">
-									<p>mapa com o soldado a movimentar-se em tempo real</p>
-									<p>tabela com os dados do gps</p>
-									<p>dados do capacete sobre o soldado que dá uma mensagem caso os niveis de monoxio de carbono esta demasiado elevado</p>
-									<p>grafico e tabela informativa sobre o ECG do soldado</p>
-								</th>
-							</tr>
-							<tr>
-								<th style="width: 200px;">
-									Data models
-								<th>
-								<th style=" font-size: 13px;">
-									<p> GPS.tsv -> </p>
-									<p> Helmet.tsv -> </p> 
-									<p> VitalJacket_ECG.tsv -> </p>
-								</th>
-							</tr>
-							<tr>
-								<th style="width: 200px;">
-									IP's & Ports
-								<th>
-								<th style=" font-size: 13px;">
-									<p><a href="http://192.168.160.87:21004" style="color: green;">React</a> -> 192.168.160.87:21004</p>
-									<p><a href="http://192.168.160.20:9090" style="color: green;">Jenkins</a> -> 192.168.160.20:9090</p> 
-									<p><a href="http://192.168.160.18:5601" style="color: green;">Elastic</a> -> 192.168.160.18:5601</p>
-								</th>
-							</tr>
-							<tr>
-								<th style="width: 200px;">
-									Kafka Topicos
-								<th>
-								<th style=" font-size: 13px;">
-									<p>ECG - batimentos cardiacos, passa 125 da alert </p>
-									<p>CO - monoxido de carbono, maior que 0 da alert </p>
-								</th>
-							</tr>
-							<tr>
-								<th style="width: 200px;">
-									Repository organization
-								<th>
-								<th style=" font-size: 13px;">
-									<p> </p>
-									<p></p>
-								</th>
-							</tr>
-							<tr>
-								<th style="width: 200px;">
-									Jenkings Pipeline
-								<th>
-								<th style=" font-size: 13px;">
-									<p> </p>
-									<p></p>
-								</th>
-							</tr>
-							<tr>
-								<th style="width: 200px;">
-									Tests
-								<th>
-								<th style=" font-size: 13px;">
-									<p>Unit Tests ->  mvn tests para testar</p>
-									<p>Integration Tests -> têm quer ser testados separadamente</p>
-									<p>Cucumber Tests  ->  mvn tests para testa</p>
-								</th>
-							</tr>
-							<tr>
-								<th style="width: 200px;">
-									Final considerations
-								<th>
-								<th style=" font-size: 13px;">
-									<p>(dificuldades & what you would have changed)</p>
-								</th>
-							</tr>
-						</table>
-					</div>
-				</div><br><br>
-			</div>
-		</section>
+	
 		
         <!--
         End Scenarios
